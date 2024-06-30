@@ -7,8 +7,9 @@ defmodule Library.Bookshelf do
       define :list_books, action: :read
       define :update_book, action: :update
       define :destroy_book, action: :destroy
-      define :get_book, args: [:id], action: :by_id
+      define :get_book_by_id, args: [:id], action: :by_id
       define :get_book_by_title, args: [:title], action: :by_title
+      define :get_book_by_isbn, args: [:isbn], action: :by_isbn
     end
   end
 end

@@ -19,16 +19,21 @@ defmodule Library.Bookshelf.Book do
       accept [:title, :subject, :summary]
     end
 
+    read :by_title do
+      argument :title, :string, allow_nil?: false
+      filter expr(contains(title, ^arg(:title)))
+    end
+
     read :by_id do
       argument :id, :uuid, allow_nil?: false
       get? true
       filter expr(id == ^arg(:id))
     end
 
-    read :by_title do
-      argument :title, :string, allow_nil?: false
+    read :by_isbn do
+      argument :isbn, :string, allow_nil?: false
       get? true
-      filter expr(id == ^arg(:title))
+      filter expr(isbn == ^arg(:isbn))
     end
   end
 
@@ -45,5 +50,8 @@ defmodule Library.Bookshelf.Book do
 
     attribute :subject, :string
     attribute :summary, :string
+
+    create_timestamp :inserted_at
+    update_timestamp :updated_at
   end
 end
