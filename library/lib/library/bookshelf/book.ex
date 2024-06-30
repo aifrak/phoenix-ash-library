@@ -11,16 +11,10 @@ defmodule Library.Bookshelf.Book do
   attributes do
     uuid_primary_key :id
 
-    attribute :isbn, :string do
-      allow_nil? false
-    end
-
-    attribute :title, :string do
-      allow_nil? false
-    end
-
-    attribute :subject, :string
-    attribute :summary, :string
+    attribute :isbn, :string, allow_nil?: false, public?: true
+    attribute :title, :string, allow_nil?: false, public?: true
+    attribute :subject, :string, public?: true
+    attribute :summary, :string, public?: true
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
