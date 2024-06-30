@@ -1,0 +1,69 @@
+{
+  "recommendations": [
+    // Elixir
+    "jakebecker.elixir-ls",
+    "adamzapasnik.credo-linter",
+    "benvp.vscode-hex-pm-intellisense",
+    "florinpatrascu.vscode-elixir-snippets",
+    "jamilabreu.vscode-phoenix-snippets",
+
+    // Phoenix
+    "phoenixframework.phoenix",
+
+    // Remote container
+    "ms-vscode-remote.remote-containers",
+
+    // HTML
+    "bradgashler.htmltagwrap",
+    "formulahendry.auto-rename-tag",
+
+    // CSS, SASS/SCSS
+    "christian-kohler.path-intellisense",
+    "pranaygp.vscode-css-peek",
+
+    // EditorConfig
+    "editorconfig.editorconfig",
+
+    // Git
+    "eamodio.gitlens",
+
+    // Github Actions
+    "cschleiden.vscode-github-actions",
+
+    // Gitignore
+    "codezombiech.gitignore",
+
+    // Dockerfile
+    "exiasr.hadolint",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Shell
+    "foxundermoon.shell-format",
+    "timonwong.shellcheck",
+
+    // YAML
+    "redhat.vscode-yaml",
+
+    // Markdown
+    "davidanson.vscode-markdownlint",
+    "shd101wyy.markdown-preview-enhanced",
+    "yzhang.markdown-all-in-one",
+
+    // Formatters
+    "esbenp.prettier-vscode",
+
+    // Comments
+    "stackbreak.comment-divider",
+    "exodiusstudios.comment-anchors",
+
+    // Cron jobs
+    "tumido.cron-explained",
+
+    // Spellcheck
+    "streetsidesoftware.code-spell-checker"
+  ],
+
+  "unwantedRecommendations": []
+}

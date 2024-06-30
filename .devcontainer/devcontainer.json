@@ -1,0 +1,78 @@
+{
+  "name": "programming-phoenix-liveview",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/app",
+  /*
+  Workaround to set APP_DIR to current workspace directory.
+  devcontainer is ignoring "workspaceFolder" when repository is cloned into a
+  container volume from VSCode.
+  */
+  "containerEnv": {
+    "APP_DIR": "${containerWorkspaceFolder}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "shellformat.path": "/usr/local/bin/shfmt",
+        // "languagesMap" is set here instead of settings.json because of a bug
+        // https://github.com/stackbreak/comment-divider/issues/35
+        "comment-divider.languagesMap": {
+          "elixir": ["#", "#"]
+        }
+      },
+      "extensions": [
+        // Elixir
+        "jakebecker.elixir-ls",
+        "adamzapasnik.credo-linter",
+        "benvp.vscode-hex-pm-intellisense",
+
+        // Phoenix
+        "phoenixframework.phoenix",
+
+        // EditorConfig
+        "editorconfig.editorconfig",
+
+        // Commit
+        "joshbolduc.commitlint",
+        "vivaxy.vscode-conventional-commits",
+
+        // Git
+        "eamodio.gitlens",
+
+        // Gitignore
+        "codezombiech.gitignore",
+
+        // Docker
+        "ms-azuretools.vscode-docker",
+
+        // Dockerfile
+        "exiasr.hadolint",
+
+        // Shell
+        "foxundermoon.shell-format",
+        "timonwong.shellcheck",
+
+        // Markdown
+        "davidanson.vscode-markdownlint",
+        "yzhang.markdown-all-in-one",
+
+        // YAML
+        "redhat.vscode-yaml",
+
+        // Formatters
+        "esbenp.prettier-vscode",
+
+        // Comments
+        "stackbreak.comment-divider",
+        "exodiusstudios.comment-anchors",
+
+        // Spellcheck
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  }
+}

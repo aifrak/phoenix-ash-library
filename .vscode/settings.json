@@ -1,0 +1,124 @@
+{
+  // Editor:
+  "editor.rulers": [80],
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    ".gitignore": ".git*",
+    ".markdownlint*": ".markdownlintignore",
+    "Dockerfile": ".docker*, docker-compose.*, Dockerfile*",
+    "mix.exs": ".formatter.exs, mix.*",
+    "README.*": "*.md, LICENSE"
+  },
+
+  // Files:
+  "files.associations": {
+    ".markdownlintignore": "ignore",
+    ".sobelow-conf": "elixir"
+  },
+  "files.watcherExclude": {
+    "**/.git": true,
+    // VSCode
+    "**/.history/**": true,
+    // Elixir
+    "**/_build/**": true,
+    "**/.elixir_ls/**": true,
+    "**/.fetch/**": true,
+    "**/.sobelow": true,
+    "**/cover/**": true,
+    "**/deps/**": true,
+    "**/doc/**": true,
+    "**/erl_crash.dump": true,
+    // Dialyzer
+    "**/dialyzer/plts": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    // VSCode
+    "**/.history": true
+  },
+
+  // Search:
+  "search.exclude": {
+    "**/.git": true,
+    // VSCode
+    "**/.history": true,
+    // Elixir
+    "**/_build": true,
+    "**/.elixir_ls": true,
+    "**/.fetch": true,
+    "**/.sobelow": true,
+    "**/cover": true,
+    "**/deps": true,
+    "**/doc": true,
+    "**/erl_crash.dump": true,
+    // Dialyzer
+    "**/dialyzer/plts": true
+  },
+
+  // Git:
+  "git.inputValidationSubjectLength": 100,
+
+  // Prettier:
+  "prettier.useEditorConfig": true,
+
+  // Shellformat:
+  "shellformat.useEditorConfig": true,
+
+  // Shellcheck:
+  "shellcheck.customArgs": ["-x"],
+  "shellcheck.useWorkspaceRootAsCwd": true,
+
+  // Comments:
+  "comment-divider.length": 50,
+  // Any changes to "languagesMap" should be done also in devcontainer.json
+  // https://github.com/stackbreak/comment-divider/issues/35
+  "comment-divider.languagesMap": {
+    "elixir": ["#", "#"]
+  },
+  "comment-divider.lineFiller": "—",
+  "comment-divider.mainHeaderFiller": "—",
+  "comment-divider.subheaderFiller": "—",
+
+  // Markdown All in One:
+  "markdown.extension.orderedList.marker": "one",
+
+  // Override languages:
+  "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[css][html][javascript][json][jsonc][markdown][sass][scss][yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[elixir]": {
+    "editor.rulers": [98]
+  },
+  "[eex][html-eex][html]": {
+    "editor.rulers": [120]
+  },
+  "[git-commit][git-rebase][javascript]": {
+    // javascript: Follow rule from eslint-config-airbnb-base
+    "editor.rulers": [100]
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+
+  // VSCode icons:
+  "vsicons.associations.files": [
+    {
+      "icon": "docker",
+      "extensions": ["docker-compose.dev.yml", "docker-compose.override.yml"],
+      "filename": true
+    },
+    {
+      "icon": "markdownlint",
+      "extensions": [".markdownlintignore"],
+      "filename": true
+    }
+  ],
+  "elixirLS.projectDir": "pento"
+}

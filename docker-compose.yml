@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  app:
+    image: aifrak/programming-phoenix-liveview:latest
+    depends_on:
+      - db
+    build:
+      context: .
+      target: dev
+      args:
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+    user: ${USER_UID:-1000}:${USER_GID:-1000}
+    command: sleep infinity
+    environment:
+      - LANG=en_US.UTF-8
+    volumes:
+      - .:/app
+    networks:
+      - default
+
+  db:
+    image: postgres:16.3
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_DB=${DB_NAME:-pento_dev}
+    expose:
+      - 5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - default
+
+volumes:
+  db_data: null
+
+networks:
+  default:
