@@ -47,7 +47,7 @@ defmodule LibraryWeb.BooksLive do
     <h2 class="mt-8 text-lg">Update Book</h2>
     <.form :let={f} for={@update_form} phx-submit="update_book">
       <.label>Book Name</.label>
-      <.input type="select" field={f[:book_id]} options={@book_selector} />
+      <.input type="select" field={f[:book_id]} options={@book_options} />
       <.input type="text" field={f[:subject]} placeholder="input subject" />
       <.input type="text" field={f[:summary]} placeholder="input summary" />
       <.button class="mt-2" type="submit">Update</.button>
@@ -61,7 +61,7 @@ defmodule LibraryWeb.BooksLive do
     socket
     |> assign(
       books: books,
-      book_selector: book_selector(books)
+      book_options: book_options(books)
     )
     |> assign_create_form()
     |> assign_update_form(books)
@@ -72,7 +72,7 @@ defmodule LibraryWeb.BooksLive do
     book_id |> Bookshelf.get_book_by_id!() |> Bookshelf.destroy_book!()
     books = Bookshelf.list_books!()
 
-    {:noreply, assign(socket, books: books, book_selector: book_selector(books))}
+    {:noreply, assign(socket, books: books, book_options: book_options(books))}
   end
 
   def handle_event("create_book", %{"form" => form_params}, socket) do
@@ -81,7 +81,7 @@ defmodule LibraryWeb.BooksLive do
         books = Bookshelf.list_books!()
 
         socket
-        |> assign(books: books, book_selector: book_selector(books))
+        |> assign(books: books, book_options: book_options(books))
         |> then(&{:noreply, &1})
 
       {:error, create_form} ->
@@ -95,7 +95,7 @@ defmodule LibraryWeb.BooksLive do
         books = Bookshelf.list_books!()
 
         socket
-        |> assign(books: books, book_selector: book_selector(books))
+        |> assign(books: books, book_options: book_options(books))
         |> then(&{:noreply, &1})
 
       {:error, update_form} ->
@@ -103,7 +103,7 @@ defmodule LibraryWeb.BooksLive do
     end
   end
 
-  defp book_selector(books) do
+  defp book_options(books) do
     for book <- books do
       {book.title, book.id}
     end
@@ -116,7 +116,6 @@ defmodule LibraryWeb.BooksLive do
   end
 
   defp assign_update_form(socket, books) do
-    dbg("update")
     form = books |> List.first(%Book{}) |> AshPhoenix.Form.for_update(:update) |> to_form()
 
     assign(socket, :update_form, form)
