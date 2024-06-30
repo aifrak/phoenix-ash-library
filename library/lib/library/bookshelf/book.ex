@@ -8,18 +8,6 @@ defmodule Library.Bookshelf.Book do
     repo Library.Repo
   end
 
-  attributes do
-    uuid_primary_key :id
-
-    attribute :isbn, :string, allow_nil?: false, public?: true
-    attribute :title, :string, allow_nil?: false, public?: true
-    attribute :subject, :string, public?: true
-    attribute :summary, :string, public?: true
-
-    create_timestamp :inserted_at
-    update_timestamp :updated_at
-  end
-
   actions do
     defaults [:read, :destroy]
 
@@ -47,5 +35,17 @@ defmodule Library.Bookshelf.Book do
       get? true
       filter expr(isbn == ^arg(:isbn))
     end
+  end
+
+  attributes do
+    uuid_primary_key :id
+
+    attribute :isbn, :string, allow_nil?: false, public?: true
+    attribute :title, :string, allow_nil?: false, public?: true
+    attribute :subject, :string, public?: true
+    attribute :summary, :string, public?: true
+
+    create_timestamp :inserted_at
+    update_timestamp :updated_at
   end
 end
