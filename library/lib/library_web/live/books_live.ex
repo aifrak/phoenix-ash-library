@@ -61,11 +61,10 @@ defmodule LibraryWeb.BooksLive do
     socket
     |> assign(
       books: books,
-      book_selector: book_selector(books),
-      create_form: Book |> AshPhoenix.Form.for_create(:create) |> to_form(),
-      update_form:
-        books |> List.first(%Book{}) |> AshPhoenix.Form.for_update(:update) |> to_form()
+      book_selector: book_selector(books)
     )
+    |> assign_create_form()
+    |> assign_update_form(books)
     |> then(&{:ok, &1})
   end
 
@@ -76,49 +75,51 @@ defmodule LibraryWeb.BooksLive do
     {:noreply, assign(socket, books: books, book_selector: book_selector(books))}
   end
 
-  def handle_event(
-        "create_book",
-        %{
-          "form" => %{
-            "isbn" => isbn,
-            "title" => title,
-            "subject" => subject,
-            "summary" => summary
-          }
-        },
+  def handle_event("create_book", %{"form" => form_params}, socket) do
+    case AshPhoenix.Form.submit(socket.assigns.create_form, params: form_params) do
+      {:ok, _book} ->
+        books = Bookshelf.list_books!()
+
         socket
-      ) do
-    Bookshelf.create_book(%{
-      :isbn => isbn,
-      :title => title,
-      :subject => subject,
-      :summary => summary
-    })
+        |> assign(books: books, book_selector: book_selector(books))
+        |> assign_create_form()
+        |> then(&{:noreply, &1})
 
-    books = Bookshelf.list_books!()
-
-    {:noreply, assign(socket, books: books, book_selector: book_selector(books))}
+      {:error, create_form} ->
+        {:noreply, assign(socket, create_form: create_form)}
+    end
   end
 
   def handle_event("update_book", %{"form" => form_params}, socket) do
-    %{
-      "book_id" => book_id,
-      "subject" => subject,
-      "summary" => summary
-    } = form_params
+    case AshPhoenix.Form.submit(socket.assigns.update_form, params: form_params) do
+      {:ok, _book} ->
+        books = Bookshelf.list_books!()
 
-    book_id
-    |> Bookshelf.get_book_by_id!()
-    |> Bookshelf.update_book!(%{subject: subject, summary: summary})
+        socket
+        |> assign(books: books, book_selector: book_selector(books))
+        |> assign_update_form(books)
+        |> then(&{:noreply, &1})
 
-    books = Bookshelf.list_books!()
-
-    {:noreply, assign(socket, books: books, book_selector: book_selector(books))}
+      {:error, update_form} ->
+        {:noreply, assign(socket, update_form: update_form)}
+    end
   end
 
   defp book_selector(books) do
     for book <- books do
       {book.title, book.id}
     end
+  end
+
+  defp assign_create_form(socket) do
+    from = Book |> AshPhoenix.Form.for_create(:create) |> to_form()
+
+    assign(socket, :create_form, from)
+  end
+
+  defp assign_update_form(socket, books) do
+    form = books |> List.first(%Book{}) |> AshPhoenix.Form.for_update(:update) |> to_form()
+
+    assign(socket, :update_form, form)
   end
 end
