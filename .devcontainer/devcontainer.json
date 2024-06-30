@@ -1,9 +1,6 @@
 {
-  "name": "programming-phoenix-liveview",
-  "dockerComposeFile": [
-    "../docker-compose.yml",
-    "docker-compose.yml"
-  ],
+  "name": "phoenix-ash-library",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/app",
   /*

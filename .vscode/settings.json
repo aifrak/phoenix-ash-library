@@ -120,5 +120,5 @@
       "filename": true
     }
   ],
-  "elixirLS.projectDir": "pento"
+  "elixirLS.projectDir": "library"
 }
