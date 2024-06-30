@@ -18,6 +18,8 @@ defmodule LibraryWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/books", BooksLive
   end
 
   # Other scopes may use custom stacks.
