@@ -35,6 +35,25 @@ defmodule Library.Bookshelf.Book do
       get? true
       filter expr(isbn == ^arg(:isbn))
     end
+
+    read :search do
+      description """
+      # Examples:
+        iex> Library.Bookshelf.search("o", page: [limit: 1])
+      """
+
+      argument :query, :string
+
+      prepare build(sort: [title: :asc, id: :asc])
+
+      pagination offset?: true, default_limit: 10, countable: :by_default
+
+      filter expr(
+               contains(string_downcase(title), ^arg(:query)) or
+                 contains(string_downcase(summary), ^arg(:query)) or
+                 contains(string_downcase(subject), ^arg(:query))
+             )
+    end
   end
 
   attributes do
