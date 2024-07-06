@@ -10,7 +10,7 @@ defmodule Library.Bookshelf do
       define :get_book_by_id, args: [:id], action: :by_id
       define :get_book_by_title, args: [:title], action: :by_title
       define :get_book_by_isbn, args: [:isbn], action: :by_isbn
-      define :search, args: [:query], action: :search
+      define :search_books, args: [:query], action: :search
     end
   end
 end
