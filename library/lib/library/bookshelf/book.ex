@@ -21,19 +21,10 @@ defmodule Library.Bookshelf.Book do
 
     read :by_title do
       argument :title, :string, allow_nil?: false
-      filter expr(contains(title, ^arg(:title)))
-    end
 
-    read :by_id do
-      argument :id, :uuid, allow_nil?: false
-      get? true
-      filter expr(id == ^arg(:id))
-    end
+      filter expr(contains(string_downcase(title), string_downcase(^arg(:title))))
 
-    read :by_isbn do
-      argument :isbn, :string, allow_nil?: false
-      get? true
-      filter expr(isbn == ^arg(:isbn))
+      pagination offset?: true, default_limit: 10, countable: :by_default
     end
 
     read :search do
