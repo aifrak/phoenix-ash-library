@@ -19,7 +19,14 @@ defmodule LibraryWeb.Router do
 
     get "/", PageController, :home
 
-    live "/books", BooksLive
+    live "/books-tutorial", BooksLive
+
+    live "/books", BookLive.Index, :index
+    live "/books/new", BookLive.Index, :new
+    live "/books/:id/edit", BookLive.Index, :edit
+
+    live "/books/:id", BookLive.Show, :show
+    live "/books/:id/show/edit", BookLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
