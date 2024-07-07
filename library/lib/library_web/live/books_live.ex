@@ -69,8 +69,8 @@ defmodule LibraryWeb.BooksLive do
       books: books,
       book_options: book_options(books)
     )
-    |> assign_create_form()
-    |> assign_update_form(books)
+    |> reset_create_form()
+    |> reset_update_form(books)
     |> then(&{:ok, &1})
   end
 
@@ -88,6 +88,7 @@ defmodule LibraryWeb.BooksLive do
 
         socket
         |> assign(books: books, book_options: book_options(books))
+        |> reset_create_form()
         |> then(&{:noreply, &1})
 
       {:error, create_form} ->
@@ -102,6 +103,7 @@ defmodule LibraryWeb.BooksLive do
 
         socket
         |> assign(books: books, book_options: book_options(books))
+        |> reset_update_form(books)
         |> then(&{:noreply, &1})
 
       {:error, update_form} ->
@@ -115,13 +117,13 @@ defmodule LibraryWeb.BooksLive do
     end
   end
 
-  defp assign_create_form(socket) do
+  defp reset_create_form(socket) do
     from = Book |> AshPhoenix.Form.for_create(:create) |> to_form()
 
     assign(socket, :create_form, from)
   end
 
-  defp assign_update_form(socket, books) do
+  defp reset_update_form(socket, books) do
     form = books |> List.first(%Book{}) |> AshPhoenix.Form.for_update(:update) |> to_form()
 
     assign(socket, :update_form, form)
