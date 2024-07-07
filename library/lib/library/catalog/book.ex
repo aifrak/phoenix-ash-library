@@ -3,6 +3,11 @@ defmodule Library.Catalog.Book do
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer
 
+  resource do
+    description "Resource handling books."
+    plural_name :books
+  end
+
   postgres do
     table "books"
     repo Library.Repo
