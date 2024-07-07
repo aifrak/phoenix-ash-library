@@ -1,8 +1,8 @@
 defmodule LibraryWeb.BooksLive do
   use LibraryWeb, :live_view
 
-  alias Library.Bookshelf
-  alias Library.Bookshelf.Book
+  alias Library.Catalog
+  alias Library.Catalog.Book
 
   def render(assigns) do
     ~H"""
@@ -56,7 +56,7 @@ defmodule LibraryWeb.BooksLive do
   end
 
   def mount(_params, _session, socket) do
-    books = Bookshelf.list_books!()
+    books = Catalog.list_books!()
 
     socket
     |> assign(
@@ -69,8 +69,8 @@ defmodule LibraryWeb.BooksLive do
   end
 
   def handle_event("delete_book", %{"book-id" => book_id}, socket) do
-    book_id |> Bookshelf.get_book_by_id!() |> Bookshelf.destroy_book!()
-    books = Bookshelf.list_books!()
+    book_id |> Catalog.get_book_by_id!() |> Catalog.destroy_book!()
+    books = Catalog.list_books!()
 
     {:noreply, assign(socket, books: books, book_options: book_options(books))}
   end
@@ -78,7 +78,7 @@ defmodule LibraryWeb.BooksLive do
   def handle_event("create_book", %{"form" => form_params}, socket) do
     case AshPhoenix.Form.submit(socket.assigns.create_form, params: form_params) do
       {:ok, _book} ->
-        books = Bookshelf.list_books!()
+        books = Catalog.list_books!()
 
         socket
         |> assign(books: books, book_options: book_options(books))
@@ -92,7 +92,7 @@ defmodule LibraryWeb.BooksLive do
   def handle_event("update_book", %{"form" => form_params}, socket) do
     case AshPhoenix.Form.submit(socket.assigns.update_form, params: form_params) do
       {:ok, _book} ->
-        books = Bookshelf.list_books!()
+        books = Catalog.list_books!()
 
         socket
         |> assign(books: books, book_options: book_options(books))

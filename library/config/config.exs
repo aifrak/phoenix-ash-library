@@ -8,7 +8,7 @@
 import Config
 
 config :library,
-  ash_domains: [Library.Bookshelf],
+  ash_domains: [Library.Catalog],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint

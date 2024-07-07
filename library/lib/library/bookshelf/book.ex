@@ -1,6 +1,6 @@
-defmodule Library.Bookshelf.Book do
+defmodule Library.Catalog.Book do
   use Ash.Resource,
-    domain: Library.Bookshelf,
+    domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer
 
   postgres do
@@ -32,11 +32,11 @@ defmodule Library.Bookshelf.Book do
       ## Examples:
 
       Add limit (see: https://hexdocs.pm/ash/Ash.Query.html#page/2):
-        iex> Library.Bookshelf.search_books("example", page: [limit: 1])
+        iex> Library.Catalog.search_books("example", page: [limit: 1])
 
       Sort by title (see: https://hexdocs.pm/ash/Ash.Query.html#sort/3):
-        iex> Library.Bookshelf.search_books("example", query: [sort: [title: :desc]])
-        iex> Library.Bookshelf.search_books("example", query: [sort: [title: :desc]])
+        iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
+        iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
       """
 
       argument :query, :string, allow_nil?: true

@@ -1,8 +1,8 @@
-defmodule Library.Bookshelf do
+defmodule Library.Catalog do
   use Ash.Domain
 
   resources do
-    resource Library.Bookshelf.Book do
+    resource Library.Catalog.Book do
       define :create_book, action: :create
       define :list_books, action: :read
       define :update_book, action: :update
