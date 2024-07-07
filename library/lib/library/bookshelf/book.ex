@@ -59,6 +59,12 @@ defmodule Library.Catalog.Book do
     end
   end
 
+  validations do
+    validate compare(:published_at, less_than: &Date.utc_today/0),
+      on: [:create, :update],
+      message: "must be before today"
+  end
+
   attributes do
     uuid_primary_key :id
 
