@@ -12,11 +12,11 @@ defmodule Library.Catalog.Book do
     defaults [:read, :destroy]
 
     create :create do
-      accept [:isbn, :title, :subject, :summary]
+      accept [:isbn, :title, :subject, :summary, :published_at]
     end
 
     update :update do
-      accept [:title, :subject, :summary]
+      accept [:title, :subject, :summary, :published_at]
     end
 
     read :by_title do
@@ -66,6 +66,7 @@ defmodule Library.Catalog.Book do
     attribute :title, :string, allow_nil?: false, public?: true
     attribute :subject, :string, public?: true
     attribute :summary, :string, public?: true
+    attribute :published_at, :date, public?: true
 
     create_timestamp :inserted_at
     update_timestamp :updated_at

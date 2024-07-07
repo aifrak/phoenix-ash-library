@@ -26,6 +26,10 @@ defmodule LibraryWeb.BooksLive do
             <div class="font-bold">Summary:</div>
             <div><%= book.summary %></div>
           </div>
+          <div>
+            <div class="font-bold">Published at:</div>
+            <div><%= book.published_at %></div>
+          </div>
           <button
             class="mt-2 p-2 bg-black text-white rounded-md"
             phx-click="delete_book"
@@ -42,6 +46,7 @@ defmodule LibraryWeb.BooksLive do
       <.input type="text" field={f[:title]} placeholder="input title" />
       <.input type="text" field={f[:subject]} placeholder="input subject" />
       <.input type="text" field={f[:summary]} placeholder="input summary" />
+      <.input type="date" field={f[:published_at]} placeholder="input published at" />
       <.button class="mt-2" type="submit">Create</.button>
     </.form>
     <h2 class="mt-8 text-lg">Update Book</h2>
@@ -50,6 +55,7 @@ defmodule LibraryWeb.BooksLive do
       <.input type="select" field={f[:book_id]} options={@book_options} />
       <.input type="text" field={f[:subject]} placeholder="input subject" />
       <.input type="text" field={f[:summary]} placeholder="input summary" />
+      <.input type="date" field={f[:published_at]} placeholder="input published at" />
       <.button class="mt-2" type="submit">Update</.button>
     </.form>
     """
