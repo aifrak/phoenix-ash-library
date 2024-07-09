@@ -1,7 +1,8 @@
 defmodule Library.Catalog.Book do
   use Ash.Resource,
     domain: Library.Catalog,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshStateMachine]
 
   resource do
     description "Resource handling books."
@@ -13,6 +14,18 @@ defmodule Library.Catalog.Book do
     repo Library.Repo
   end
 
+  state_machine do
+    initial_states [:draft]
+    default_initial_state :draft
+
+    transitions do
+      transition :release_alpha, from: :draft, to: :alpha
+      transition :release_beta, from: [:draft, :alpha], to: :beta
+      transition :publish, from: [:draft, :alpha, :beta], to: :published
+      transition :retire, from: [:draft, :alpha, :beta, :published], to: :retired
+    end
+  end
+
   actions do
     defaults [:read, :destroy]
 
@@ -22,6 +35,22 @@ defmodule Library.Catalog.Book do
 
     update :update do
       accept [:title, :subject, :summary, :published_at]
+    end
+
+    update :release_alpha do
+      change transition_state(:alpha)
+    end
+
+    update :release_beta do
+      change transition_state(:beta)
+    end
+
+    update :publish do
+      change transition_state(:published)
+    end
+
+    update :retire do
+      change transition_state(:retired)
     end
 
     read :by_title do
@@ -73,6 +102,7 @@ defmodule Library.Catalog.Book do
   attributes do
     uuid_primary_key :id
 
+    attribute :state, Library.Catalog.BookState, default: :draft, allow_nil?: false, public?: true
     attribute :isbn, :string, allow_nil?: false, public?: true
     attribute :title, :string, allow_nil?: false, public?: true
     attribute :subject, :string, public?: true
