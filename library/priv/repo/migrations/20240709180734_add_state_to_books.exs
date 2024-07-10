@@ -7,9 +7,10 @@ defmodule Library.Repo.Migrations.AddStateToBooks do
 
   use Ecto.Migration
 
-  alias Library.Catalog.BookState
+  alias Library.Catalog.Book.Types.State
 
   def up do
+    # Note: Not sure if it is a good idea to have enum in database
     AshPostgres.Migration.create_enum(BookState)
 
     alter table(:books) do

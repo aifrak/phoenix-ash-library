@@ -1,4 +1,4 @@
-defmodule Library.Catalog.BookState do
+defmodule Library.Catalog.Book.Types.State do
   use Ash.Type.Enum,
     values: [
       draft: "A book in draft",

@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :ash, custom_types: [book_state: Library.Catalog.Book.Types.State]
+
 config :library,
   ash_domains: [Library.Catalog],
   generators: [timestamp_type: :utc_datetime]

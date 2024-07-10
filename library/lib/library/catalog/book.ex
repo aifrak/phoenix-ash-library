@@ -102,7 +102,7 @@ defmodule Library.Catalog.Book do
   attributes do
     uuid_primary_key :id
 
-    attribute :state, Library.Catalog.BookState, default: :draft, allow_nil?: false, public?: true
+    attribute :state, :book_state, default: :draft, allow_nil?: false, public?: true
     attribute :isbn, :string, allow_nil?: false, public?: true
     attribute :title, :string, allow_nil?: false, public?: true
     attribute :subject, :string, public?: true
