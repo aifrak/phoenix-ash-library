@@ -33,9 +33,9 @@ defmodule Library.Catalog.Book do
   end
 
   validations do
-    validate compare(:published_at, less_than: &Date.utc_today/0),
+    validate compare(:published_at, less_than_or_equal_to: &Date.utc_today/0),
       on: [:create, :update],
-      message: "must be before today"
+      message: "must be today or before"
   end
 
   state_machine do
