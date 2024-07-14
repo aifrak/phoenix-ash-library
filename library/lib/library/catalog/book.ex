@@ -10,9 +10,32 @@ defmodule Library.Catalog.Book do
     plural_name :books
   end
 
-  postgres do
-    table "books"
-    repo Library.Repo
+  attributes do
+    uuid_primary_key :id
+
+    attribute :state, :book_state, default: :draft, allow_nil?: false, public?: true
+    attribute :isbn, :string, allow_nil?: false, public?: true
+    attribute :title, :string, allow_nil?: false, public?: true
+    attribute :subject, :string, public?: true
+    attribute :summary, :string, public?: true
+    attribute :published_at, :date, public?: true
+
+    create_timestamp :inserted_at
+    update_timestamp :updated_at
+  end
+
+  relationships do
+    many_to_many :authors, Library.Catalog.Author do
+      through Library.Catalog.BookAuthor
+      source_attribute_on_join_resource :book_id
+      destination_attribute_on_join_resource :author_id
+    end
+  end
+
+  validations do
+    validate compare(:published_at, less_than: &Date.utc_today/0),
+      on: [:create, :update],
+      message: "must be before today"
   end
 
   state_machine do
@@ -100,31 +123,8 @@ defmodule Library.Catalog.Book do
     end
   end
 
-  validations do
-    validate compare(:published_at, less_than: &Date.utc_today/0),
-      on: [:create, :update],
-      message: "must be before today"
-  end
-
-  attributes do
-    uuid_primary_key :id
-
-    attribute :state, :book_state, default: :draft, allow_nil?: false, public?: true
-    attribute :isbn, :string, allow_nil?: false, public?: true
-    attribute :title, :string, allow_nil?: false, public?: true
-    attribute :subject, :string, public?: true
-    attribute :summary, :string, public?: true
-    attribute :published_at, :date, public?: true
-
-    create_timestamp :inserted_at
-    update_timestamp :updated_at
-  end
-
-  relationships do
-    many_to_many :authors, Library.Catalog.Author do
-      through Library.Catalog.BookAuthor
-      source_attribute_on_join_resource :book_id
-      destination_attribute_on_join_resource :author_id
-    end
+  postgres do
+    table "books"
+    repo Library.Repo
   end
 end

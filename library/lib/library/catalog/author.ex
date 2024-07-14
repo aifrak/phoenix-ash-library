@@ -9,16 +9,6 @@ defmodule Library.Catalog.Author do
     plural_name :authors
   end
 
-  postgres do
-    table "authors"
-    repo Library.Repo
-  end
-
-  actions do
-    defaults [:create, :read, :update, :destroy]
-    default_accept [:first_name, :last_name]
-  end
-
   attributes do
     uuid_primary_key :id
 
@@ -35,5 +25,15 @@ defmodule Library.Catalog.Author do
       source_attribute_on_join_resource :author_id
       destination_attribute_on_join_resource :book_id
     end
+  end
+
+  actions do
+    defaults [:create, :read, :update, :destroy]
+    default_accept [:first_name, :last_name]
+  end
+
+  postgres do
+    table "authors"
+    repo Library.Repo
   end
 end

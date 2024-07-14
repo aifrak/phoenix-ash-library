@@ -9,6 +9,31 @@ import Config
 
 config :ash, custom_types: [book_state: Library.Catalog.Book.Types.State]
 
+config :spark, :formatter,
+  remove_parens?: true,
+  "Ash.Resource": [
+    section_order: [
+      :resource,
+      :code_interface,
+      :attributes,
+      :relationships,
+      :identities,
+      :validations,
+      :aggregates,
+      :calculations,
+      :preparations,
+      :policies,
+      :changes,
+      :state_machine,
+      :actions,
+      :postgres,
+      :authentication,
+      :token,
+      :json_api,
+      :graphql
+    ]
+  ]
+
 config :library,
   ash_domains: [Library.Catalog],
   generators: [timestamp_type: :utc_datetime]
