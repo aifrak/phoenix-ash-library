@@ -36,6 +36,12 @@ defmodule Library.Catalog.Book do
 
     update :update do
       accept [:title, :subject, :summary, :published_at]
+      argument :authors, {:array, :map}
+
+      # Add/remove author is done in another transaction
+      require_atomic? false
+
+      change manage_relationship(:authors, type: :append_and_remove)
     end
 
     update :release_alpha do
@@ -112,5 +118,13 @@ defmodule Library.Catalog.Book do
 
     create_timestamp :inserted_at
     update_timestamp :updated_at
+  end
+
+  relationships do
+    many_to_many :authors, Library.Catalog.Author do
+      through Library.Catalog.BookAuthor
+      source_attribute_on_join_resource :book_id
+      destination_attribute_on_join_resource :author_id
+    end
   end
 end

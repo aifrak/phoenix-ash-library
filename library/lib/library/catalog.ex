@@ -16,5 +16,15 @@ defmodule Library.Catalog do
       define :list_books_by_title, args: [:title], action: :by_title
       define :search_books, args: [:query], action: :search
     end
+
+    resource Library.Catalog.Author do
+      define :create_author, action: :create
+      define :get_author_by_id, get_by: [:id], action: :read
+      define :list_authors, action: :read
+      define :update_author, action: :update
+      define :destroy_author, action: :destroy
+    end
+
+    resource Library.Catalog.BookAuthor
   end
 end
