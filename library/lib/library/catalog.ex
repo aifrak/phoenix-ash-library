@@ -1,5 +1,5 @@
 defmodule Library.Catalog do
-  use Ash.Domain
+  use Ash.Domain, otp_app: :library
 
   resources do
     resource Library.Catalog.Book do

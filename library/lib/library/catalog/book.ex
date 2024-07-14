@@ -1,5 +1,6 @@
 defmodule Library.Catalog.Book do
   use Ash.Resource,
+    otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshStateMachine]
