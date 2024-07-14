@@ -77,6 +77,7 @@ defmodule Library.Catalog.Book do
 
     update :publish do
       change transition_state(:published)
+      change set_attribute(:published_at, &DateTime.utc_now/0)
     end
 
     update :retire do
