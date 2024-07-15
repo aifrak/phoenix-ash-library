@@ -36,6 +36,7 @@ config :spark, :formatter,
 
 config :library,
   ash_domains: [Library.Catalog],
+  ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint

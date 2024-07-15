@@ -8,5 +8,6 @@ defmodule Library.Catalog.Book.Types.State do
       retired: "A book retired from the library and not available anymore"
     ]
 
+  @impl true
   def storage_type(), do: :book_state
 end
