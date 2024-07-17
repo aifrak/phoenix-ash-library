@@ -9,3 +9,16 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Library.Catalog.Book
+alias Library.Catalog.Author
+alias Library.CatalogFactory
+alias Library.Repo
+
+Repo.delete_all(Author)
+Repo.delete_all(Book)
+
+CatalogFactory.insert!(Author, count: 2)
+CatalogFactory.insert!(Book, count: 2)
+CatalogFactory.insert!(Book, count: 2, build: :authors)
+CatalogFactory.insert!(Book, variant: :published, count: 2, build: :authors)

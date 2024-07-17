@@ -38,6 +38,9 @@ defmodule Library.MixProject do
       {:ash_postgres, "~> 2.0"},
       {:ash_phoenix, "~> 2.0"},
       {:ash_state_machine, "~> 0.2.4"},
+      {:smokestack, "~> 0.6.1-rc.2", only: [:dev, :test]},
+
+      # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
@@ -64,7 +67,8 @@ defmodule Library.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:faker, "~> 0.18", only: [:dev, :test]}
     ]
   end
 
