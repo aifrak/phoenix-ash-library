@@ -105,7 +105,7 @@ defmodule Library.Catalog.Book do
 
       argument :query, :string, allow_nil?: true
 
-      # Same:
+      # Same as:
       # prepare build(sort: [:title, :asc])
       prepare build(sort: [title: :asc, id: :asc])
 
