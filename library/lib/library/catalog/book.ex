@@ -20,8 +20,7 @@ defmodule Library.Catalog.Book do
     attribute :summary, :string, public?: true
     attribute :published_at, :date, public?: true
 
-    create_timestamp :inserted_at
-    update_timestamp :updated_at
+    timestamps()
   end
 
   relationships do

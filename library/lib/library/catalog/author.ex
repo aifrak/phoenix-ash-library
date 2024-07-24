@@ -15,8 +15,7 @@ defmodule Library.Catalog.Author do
     attribute :first_name, :string, allow_nil?: false, public?: true
     attribute :last_name, :string, allow_nil?: false, public?: true
 
-    create_timestamp :inserted_at
-    update_timestamp :updated_at
+    timestamps()
   end
 
   relationships do
