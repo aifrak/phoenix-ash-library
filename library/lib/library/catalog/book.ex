@@ -124,7 +124,7 @@ defmodule Library.Catalog.Book do
   end
 
   postgres do
-    table "books"
+    table "catalog_books"
     repo Library.Repo
   end
 end

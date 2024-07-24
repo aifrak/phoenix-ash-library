@@ -36,7 +36,7 @@ defmodule Library.Catalog.BookAuthor do
   end
 
   postgres do
-    table "book_authors"
+    table "catalog_books_authors"
     repo Library.Repo
 
     references do
