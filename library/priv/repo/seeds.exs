@@ -18,7 +18,8 @@ alias Library.Repo
 Repo.delete_all(Author)
 Repo.delete_all(Book)
 
-CatalogFactory.insert!(Author, count: 2)
+authors = CatalogFactory.insert!(Author, count: 2)
 CatalogFactory.insert!(Book, count: 2)
 CatalogFactory.insert!(Book, count: 2, build: :authors)
 CatalogFactory.insert!(Book, variant: :published, count: 2, build: :authors)
+CatalogFactory.insert!(Book, variant: :published, count: 2, relate: [authors: authors])
