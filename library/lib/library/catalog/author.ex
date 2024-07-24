@@ -27,6 +27,16 @@ defmodule Library.Catalog.Author do
     end
   end
 
+  aggregates do
+    count :published_books_count, :books do
+      filter expr(state == :published)
+    end
+
+    list :published_books, :books, :simple_book do
+      filter expr(state == :published)
+    end
+  end
+
   actions do
     defaults [:create, :read, :update, :destroy]
     default_accept [:first_name, :last_name]

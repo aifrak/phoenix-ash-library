@@ -38,6 +38,10 @@ defmodule Library.Catalog.Book do
       message: "must be today or before"
   end
 
+  calculations do
+    calculate :simple_book, :map, expr(%{id: id, title: title})
+  end
+
   state_machine do
     initial_states [:draft]
     default_initial_state :draft
