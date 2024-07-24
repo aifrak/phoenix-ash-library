@@ -34,6 +34,7 @@ defmodule Library.Catalog.Author do
 
     list :published_books, :books, :simple_book do
       filter expr(state == :published)
+      sort title: :asc
     end
   end
 
