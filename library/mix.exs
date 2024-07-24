@@ -38,7 +38,7 @@ defmodule Library.MixProject do
       {:ash_postgres, "~> 2.0"},
       {:ash_phoenix, "~> 2.0"},
       {:ash_state_machine, "~> 0.2.4"},
-      {:smokestack, "~> 0.6.1-rc.2", only: [:dev, :test]},
+      {:smokestack, "~> 0.9", only: [:dev, :test]},
 
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},
