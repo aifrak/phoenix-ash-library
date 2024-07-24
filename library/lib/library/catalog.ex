@@ -21,6 +21,7 @@ defmodule Library.Catalog do
       define :create_author, action: :create
       define :get_author_by_id, get_by: [:id], action: :read
       define :list_authors, action: :read
+      define :list_authors_with_top_5_books, action: :list_with_top_5_books
       define :update_author, action: :update
       define :destroy_author, action: :destroy
     end
