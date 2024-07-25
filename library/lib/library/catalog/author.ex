@@ -35,14 +35,12 @@ defmodule Library.Catalog.Author do
   end
 
   actions do
+    defaults [:create, :read, :update, :destroy]
+    default_accept [:first_name, :last_name]
+
     read :list_with_top_5_books do
       prepare {Preparations.Top5Books, []}
     end
-  end
-
-  actions do
-    defaults [:create, :read, :update, :destroy]
-    default_accept [:first_name, :last_name]
   end
 
   postgres do
