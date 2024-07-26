@@ -24,8 +24,10 @@ defmodule Library.Feedback.Review do
   end
 
   validations do
-    validate compare(:rating, greater_than_or_equal_to: 1), message: "must be between 1 and 5"
-    validate compare(:rating, less_than_or_equal_to: 5), message: "must be between 1 and 5"
+    validate compare(:rating, greater_than_or_equal_to: 1, less_than_or_equal_to: 5),
+      message: "must be between 1 and 5"
+
+    validate string_length(:comment, max: 1000)
   end
 
   actions do

@@ -33,8 +33,12 @@ defmodule Library.Catalog.Book do
 
   validations do
     validate compare(:published_at, less_than_or_equal_to: &Date.utc_today/0),
-      on: [:create, :update],
       message: "must be today or before"
+
+    validate string_length(:isbn, min: 13, max: 13)
+    validate string_length(:title, max: 200)
+    validate string_length(:subject, max: 200)
+    validate string_length(:summary, max: 500)
   end
 
   state_machine do

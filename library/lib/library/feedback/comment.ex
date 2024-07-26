@@ -15,6 +15,10 @@ defmodule Library.Feedback.Comment do
     belongs_to :author, Library.Feedback.Author, allow_nil?: false, primary_key?: true
   end
 
+  validations do
+    validate string_length(:text, max: 1000)
+  end
+
   actions do
     defaults [:create, :read, :update, :destroy]
     default_accept [:text]
