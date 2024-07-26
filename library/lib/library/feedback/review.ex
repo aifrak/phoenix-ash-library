@@ -16,6 +16,7 @@ defmodule Library.Feedback.Review do
   relationships do
     belongs_to :book, Library.Catalog.Book, allow_nil?: false, primary_key?: true
     belongs_to :author, Library.Feedback.Author, allow_nil?: false, primary_key?: true
+    has_many :comments, Library.Feedback.Comment
   end
 
   identities do
