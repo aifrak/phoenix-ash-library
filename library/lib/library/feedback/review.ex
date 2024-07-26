@@ -2,9 +2,8 @@ defmodule Library.Feedback.Review do
   use Ash.Resource,
     otp_app: :library,
     domain: Library.Feedback,
-    data_layer: AshPostgres.DataLayer
-
-  alias Library.Feedback.Review.Notifiers
+    data_layer: AshPostgres.DataLayer,
+    notifiers: [Ash.Notifier.PubSub]
 
   resource do
     description "Resource handling reviews."
@@ -48,6 +47,17 @@ defmodule Library.Feedback.Review do
 
       change manage_relationship(:book, type: :append)
       change manage_relationship(:author, type: :append)
+
+      # notifiers [Notifiers.Created]
+    end
+
+    action :subscribe_created do
+      argument :book_id, :uuid_v7
+
+      run fn input, _ ->
+        subscribe_created(input.arguments.book_id)
+        :ok
+      end
     end
   end
 
@@ -60,4 +70,15 @@ defmodule Library.Feedback.Review do
       reference :author, on_delete: :delete
     end
   end
+
+  pub_sub do
+    module LibraryWeb.Endpoint
+    prefix "feedback_review"
+
+    # topic: feedback_review:created:#{book_id}
+    publish_all :create, ["created", [:book_id, :id]]
+  end
+
+  defp subscribe_created(book_id),
+    do: Phoenix.PubSub.subscribe(Library.pub_sub(), "feedback_review:created:#{book_id}")
 end

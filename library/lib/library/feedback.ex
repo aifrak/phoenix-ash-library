@@ -8,6 +8,7 @@ defmodule Library.Feedback do
       define :get_review_by_id, get_by: :id, action: :read
       define :list_reviews, action: :read
       define :destroy_review, action: :destroy
+      define :subscribe_created_reviews, args: [:book_id], action: :subscribe_created
     end
 
     resource Library.Feedback.Author do

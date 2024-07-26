@@ -36,6 +36,9 @@ defmodule LibraryWeb.Router do
 
     live "/authors/:id", AuthorLive.Show, :show
     live "/authors/:id/show/edit", AuthorLive.Show, :edit
+
+    # Test pages
+    live "/test/reviews-notifications/:book_id", ReviewNotificationTestLive
   end
 
   # Other scopes may use custom stacks.
