@@ -5,6 +5,8 @@ defmodule Library.Catalog.Book do
     data_layer: AshPostgres.DataLayer,
     extensions: [AshStateMachine]
 
+  alias Library.Catalog.Book.Validations
+
   resource do
     description "Resource handling books."
     plural_name :books
@@ -35,7 +37,7 @@ defmodule Library.Catalog.Book do
     validate compare(:published_at, less_than_or_equal_to: &Date.utc_today/0),
       message: "must be today or before"
 
-    validate string_length(:isbn, min: 13, max: 13)
+    validate {Validations.IsISBN, []}, on: :create
     validate string_length(:title, max: 200)
     validate string_length(:subject, max: 200)
     validate string_length(:summary, max: 500)

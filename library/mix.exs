@@ -68,7 +68,8 @@ defmodule Library.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:faker, "~> 0.18", only: [:dev, :test]}
+      {:faker, "~> 0.18", only: [:dev, :test]},
+      {:exisbn, "~> 2.0"}
     ]
   end
 
