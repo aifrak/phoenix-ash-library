@@ -4,6 +4,11 @@ defmodule Library.Feedback.Comment do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer
 
+  resource do
+    description "Resource handling comments."
+    plural_name :comments
+  end
+
   attributes do
     uuid_v7_primary_key :id
 

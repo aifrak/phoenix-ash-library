@@ -6,6 +6,11 @@ defmodule Library.Feedback.Review do
 
   alias Library.Feedback.Review.Notifiers
 
+  resource do
+    description "Resource handling reviews."
+    plural_name :reviews
+  end
+
   attributes do
     uuid_v7_primary_key :id
 

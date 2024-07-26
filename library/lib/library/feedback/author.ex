@@ -4,6 +4,11 @@ defmodule Library.Feedback.Author do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer
 
+  resource do
+    description "Resource handling author."
+    plural_name :authors
+  end
+
   attributes do
     uuid_v7_primary_key :id
 
