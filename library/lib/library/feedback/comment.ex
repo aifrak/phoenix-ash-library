@@ -8,6 +8,8 @@ defmodule Library.Feedback.Comment do
     uuid_v7_primary_key :id
 
     attribute :text, :string, allow_nil?: false, public?: true
+
+    timestamps()
   end
 
   relationships do
