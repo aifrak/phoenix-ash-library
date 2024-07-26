@@ -17,5 +17,13 @@ defmodule Library.Feedback do
       define :list_authors, action: :read
       define :destroy_author, action: :destroy
     end
+
+    resource Library.Feedback.Comment do
+      define :create_comment, action: :create
+      define :update_comment, action: :update
+      define :get_comment_by_id, get_by: [:id], action: :read
+      define :list_comments, action: :read
+      define :destroy_comment, action: :destroy
+    end
   end
 end

@@ -19,6 +19,7 @@ defmodule Library.Feedback.Review do
   end
 
   identities do
+    identity :id, :id
     identity :unique, [:book_id, :author_id], message: "Author has already reviewed this book"
   end
 

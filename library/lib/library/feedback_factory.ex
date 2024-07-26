@@ -4,6 +4,7 @@ if Enum.member?([:dev, :test], Mix.env()) do
       otp_app: :library
 
     alias Library.Feedback.Author
+    alias Library.Feedback.Comment
     alias Library.Feedback.Review
 
     factory Review do
@@ -14,6 +15,10 @@ if Enum.member?([:dev, :test], Mix.env()) do
     factory Author do
       attribute :first_name, &Author.Fakes.first_name/0
       attribute :last_name, &Author.Fakes.last_name/0
+    end
+
+    factory Comment do
+      attribute :text, &Comment.Fakes.text/0
     end
   end
 end
