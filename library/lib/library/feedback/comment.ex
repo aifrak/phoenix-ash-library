@@ -20,13 +20,13 @@ defmodule Library.Feedback.Comment do
     default_accept [:text]
 
     read :list_by_review_id do
-      argument :review_id, :uuid, allow_nil?: false
+      argument :review_id, :uuid_v7, allow_nil?: false
 
       filter expr(review_id == ^arg(:review_id))
     end
 
     read :list_by_author_id do
-      argument :author_id, :uuid, allow_nil?: false
+      argument :author_id, :uuid_v7, allow_nil?: false
 
       filter expr(author_id == ^arg(:author_id))
     end
