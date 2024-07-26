@@ -13,7 +13,7 @@ defmodule Library.Catalog.Book do
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     attribute :state, :book_state, default: :draft, allow_nil?: false, public?: true
     attribute :isbn, :string, allow_nil?: false, public?: true

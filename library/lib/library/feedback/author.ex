@@ -5,7 +5,7 @@ defmodule Library.Feedback.Author do
     data_layer: AshPostgres.DataLayer
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     attribute :first_name, :string, allow_nil?: false, public?: true
     attribute :last_name, :string, allow_nil?: false, public?: true

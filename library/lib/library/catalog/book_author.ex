@@ -17,7 +17,7 @@ defmodule Library.Catalog.BookAuthor do
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     create_timestamp :inserted_at
   end

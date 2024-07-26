@@ -12,7 +12,7 @@ defmodule Library.Catalog.Author do
   end
 
   attributes do
-    uuid_primary_key :id
+    uuid_v7_primary_key :id
 
     attribute :first_name, :string, allow_nil?: false, public?: true
     attribute :last_name, :string, allow_nil?: false, public?: true
