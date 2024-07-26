@@ -4,6 +4,8 @@ defmodule Library.Feedback.Review do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer
 
+  alias Library.Feedback.Review.Notifiers
+
   attributes do
     uuid_v7_primary_key :id
 
@@ -32,8 +34,16 @@ defmodule Library.Feedback.Review do
   end
 
   actions do
-    defaults [:create, :read, :update, :destroy]
+    defaults [:read, :update, :destroy]
     default_accept [:rating, :comment]
+
+    create :create do
+      argument :book, :uuid_v7
+      argument :author, :uuid_v7
+
+      change manage_relationship(:book, type: :append)
+      change manage_relationship(:author, type: :append)
+    end
   end
 
   postgres do
