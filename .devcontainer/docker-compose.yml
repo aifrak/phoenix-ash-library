@@ -7,6 +7,8 @@ services:
     volumes:
       - vscode:/home/app-user/.vscode-server/extensions
       - vscode-insiders:/home/app-user/.vscode-server-insiders/extensions
+    environment:
+      ERL_AFLAGS: -kernel shell_history enabled
 
 volumes:
   vscode:
