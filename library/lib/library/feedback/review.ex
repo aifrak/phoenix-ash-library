@@ -3,7 +3,8 @@ defmodule Library.Feedback.Review do
     otp_app: :library,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
-    notifiers: [Ash.Notifier.PubSub]
+    notifiers: [Ash.Notifier.PubSub],
+    authorizers: [Ash.Policy.Authorizer]
 
   resource do
     description "Resource handling reviews."
@@ -37,6 +38,13 @@ defmodule Library.Feedback.Review do
     validate string_length(:comment, max: 1000)
   end
 
+  policies do
+    policy action_type(:read), authorize_if: always()
+    policy action_type(:create), authorize_if: actor_present()
+    policy action_type(:update), authorize_if: relates_to_actor_via(:author)
+    policy action_type(:destroy), authorize_if: relates_to_actor_via(:author)
+  end
+
   actions do
     defaults [:read, :update, :destroy]
     default_accept [:rating, :comment]
@@ -47,8 +55,6 @@ defmodule Library.Feedback.Review do
 
       change manage_relationship(:book, type: :append)
       change manage_relationship(:author, type: :append)
-
-      # notifiers [Notifiers.Created]
     end
 
     action :subscribe_created do

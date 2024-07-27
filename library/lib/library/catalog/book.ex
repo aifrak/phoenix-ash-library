@@ -3,7 +3,8 @@ defmodule Library.Catalog.Book do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshStateMachine]
+    extensions: [AshStateMachine],
+    authorizers: [Ash.Policy.Authorizer]
 
   alias Library.Catalog.Book.Validations
 
@@ -41,6 +42,14 @@ defmodule Library.Catalog.Book do
     validate string_length(:title, max: 200)
     validate string_length(:subject, max: 200)
     validate string_length(:summary, max: 500)
+    validate attribute_equals(:state, :draft), on: :destroy
+  end
+
+  policies do
+    policy action_type(:read), authorize_if: always()
+    policy action_type(:create), authorize_if: actor_present()
+    policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
+    policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
 
   state_machine do

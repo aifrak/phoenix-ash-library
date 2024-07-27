@@ -90,6 +90,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Log Ash authorization error details
+config :ash, :policies,
+  log_policy_breakdowns: :error,
+  log_successful_policy_breakdowns: :error
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

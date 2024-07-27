@@ -86,3 +86,8 @@ config :swoosh, :api_client, false
 
 # Debug ash PubSub
 config :ash, :pub_sub, debug?: true
+
+config :ash, :policies,
+  show_policy_breakdowns?: true,
+  log_policy_breakdowns: :debug,
+  log_successful_policy_breakdowns: :debug
