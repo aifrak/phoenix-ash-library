@@ -7,34 +7,6 @@
 # General application configuration
 import Config
 
-config :ash, custom_types: [book_state: Library.Catalog.Book.Types.State]
-
-config :spark, :formatter,
-  remove_parens?: true,
-  "Ash.Resource": [
-    section_order: [
-      :resource,
-      :code_interface,
-      :attributes,
-      :relationships,
-      :identities,
-      :validations,
-      :aggregates,
-      :calculations,
-      :preparations,
-      :policies,
-      :changes,
-      :state_machine,
-      :actions,
-      :postgres,
-      :pub_sub,
-      :authentication,
-      :token,
-      :json_api,
-      :graphql
-    ]
-  ]
-
 config :library,
   ash_domains: [Library.Feedback, Library.Catalog],
   ecto_repos: [Library.Repo],
@@ -90,10 +62,38 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :ash, custom_types: [book_state: Library.Catalog.Book.Types.State]
+
 # Log Ash authorization error details
 config :ash, :policies,
   log_policy_breakdowns: :error,
   log_successful_policy_breakdowns: :error
+
+config :spark, :formatter,
+  remove_parens?: true,
+  "Ash.Resource": [
+    section_order: [
+      :resource,
+      :code_interface,
+      :attributes,
+      :relationships,
+      :identities,
+      :validations,
+      :aggregates,
+      :calculations,
+      :preparations,
+      :policies,
+      :changes,
+      :state_machine,
+      :actions,
+      :postgres,
+      :pub_sub,
+      :authentication,
+      :token,
+      :json_api,
+      :graphql
+    ]
+  ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
