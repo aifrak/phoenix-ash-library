@@ -31,11 +31,11 @@ CatalogFactory.insert!(Catalog.Book, count: 2)
 CatalogFactory.insert!(Catalog.Book, count: 2, build: :authors)
 
 # Published books
-published_books =
+catalog_published_books =
   CatalogFactory.insert!(Catalog.Book, variant: :published, count: 2, build: :authors)
 
-published_book_1 = Enum.at(published_books, 0)
-published_book_2 = Enum.at(published_books, 1)
+catalog_published_book_1 = Enum.at(catalog_published_books, 0)
+catalog_published_book_2 = Enum.at(catalog_published_books, 1)
 
 # Book authors
 catalog_authors = CatalogFactory.insert!(Catalog.Author, count: 2)
@@ -61,12 +61,12 @@ feedback_author_2 = Enum.at(feedback_authors, 1)
 
 feedback_review_1 =
   FeedbackFactory.insert!(Feedback.Review,
-    relate: [book: published_book_1, author: feedback_author_1]
+    relate: [book: catalog_published_book_1, author: feedback_author_1]
   )
 
 feedback_review_2 =
   FeedbackFactory.insert!(Feedback.Review,
-    relate: [book: published_book_1, author: feedback_author_2]
+    relate: [book: catalog_published_book_1, author: feedback_author_2]
   )
 
 FeedbackFactory.insert!(Feedback.Comment,
@@ -77,7 +77,7 @@ FeedbackFactory.insert!(Feedback.Comment,
 # Published book with 1 review and 2 comment
 
 FeedbackFactory.insert!(Feedback.Review,
-  relate: [book: published_book_2, author: feedback_author_2]
+  relate: [book: catalog_published_book_2, author: feedback_author_2]
 )
 
 FeedbackFactory.insert!(Feedback.Comment,
