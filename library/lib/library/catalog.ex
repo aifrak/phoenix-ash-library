@@ -30,9 +30,6 @@ defmodule Library.Catalog do
   end
 
   json_api do
-    # Works in SwaggerUI but not when making requests
-    # prefix "/api/json/catalog"
-
     routes do
       # in the domain `base_route` acts like a scope
       base_route "/catalog/v1/books", Library.Catalog.Book do
@@ -50,4 +47,28 @@ defmodule Library.Catalog do
       end
     end
   end
+
+  # FIXME: Works in SwaggerUI but not when making requests.
+  # OK: http://localhost:4000/api/json/catalog/v1/books
+  # KO: http://localhost:4000/api/json/v1/books
+  # json_api do
+  #   prefix "/api/json/catalog"
+
+  #   routes do
+  #     # in the domain `base_route` acts like a scope
+  #     base_route "/v1/books", Library.Catalog.Book do
+  #       get :read
+  #       index :search
+  #       post :create
+  #       delete :destroy
+  #     end
+
+  #     base_route "/v1/authors", Library.Catalog.Author do
+  #       get :read
+  #       index :read
+  #       post :create
+  #       delete :destroy
+  #     end
+  #   end
+  # end
 end
