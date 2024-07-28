@@ -1,5 +1,5 @@
 defmodule Library.Catalog do
-  use Ash.Domain, otp_app: :library
+  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain]
 
   resources do
     resource Library.Catalog.Book do
@@ -27,5 +27,27 @@ defmodule Library.Catalog do
     end
 
     resource Library.Catalog.BookAuthor
+  end
+
+  json_api do
+    # Works in SwaggerUI but not when making requests
+    # prefix "/api/json/catalog"
+
+    routes do
+      # in the domain `base_route` acts like a scope
+      base_route "/catalog/v1/books", Library.Catalog.Book do
+        get :read
+        index :search
+        post :create
+        delete :destroy
+      end
+
+      base_route "/catalog/v1/authors", Library.Catalog.Author do
+        get :read
+        index :read
+        post :create
+        delete :destroy
+      end
+    end
   end
 end

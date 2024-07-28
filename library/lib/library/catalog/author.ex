@@ -2,7 +2,8 @@ defmodule Library.Catalog.Author do
   use Ash.Resource,
     otp_app: :library,
     domain: Library.Catalog,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
 
   alias Library.Catalog.Author.Preparations
 
@@ -51,5 +52,9 @@ defmodule Library.Catalog.Author do
   postgres do
     table "catalog_authors"
     repo Library.Repo
+  end
+
+  json_api do
+    type "author"
   end
 end

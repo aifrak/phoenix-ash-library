@@ -3,7 +3,7 @@ defmodule Library.Catalog.Book do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshStateMachine],
+    extensions: [AshJsonApi.Resource, AshStateMachine],
     authorizers: [Ash.Policy.Authorizer]
 
   alias Library.Catalog.Book.Validations
@@ -106,16 +106,17 @@ defmodule Library.Catalog.Book do
       pagination offset?: true, default_limit: 10, countable: :by_default
     end
 
+    ## Examples:
+    #
+    # Add limit (see: https://hexdocs.pm/ash/Ash.Query.html#page/2):
+    #   iex> Library.Catalog.search_books("example", page: [limit: 1])
+    #
+    # Sort by title (see: https://hexdocs.pm/ash/Ash.Query.html#sort/3):
+    #   iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
+    #   iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
     read :search do
       description """
-      ## Examples:
-
-      Add limit (see: https://hexdocs.pm/ash/Ash.Query.html#page/2):
-        iex> Library.Catalog.search_books("example", page: [limit: 1])
-
-      Sort by title (see: https://hexdocs.pm/ash/Ash.Query.html#sort/3):
-        iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
-        iex> Library.Catalog.search_books("example", query: [sort: [title: :desc]])
+      Search books containing the given query in title, summary or subject.
       """
 
       argument :query, :string, allow_nil?: true
@@ -141,5 +142,9 @@ defmodule Library.Catalog.Book do
   postgres do
     table "catalog_books"
     repo Library.Repo
+  end
+
+  json_api do
+    type "book"
   end
 end

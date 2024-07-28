@@ -71,6 +71,12 @@ config :ash, :policies,
 
 config :spark, :formatter,
   remove_parens?: true,
+  "Ash.Domain": [
+    section_order: [
+      :resources,
+      :json_api
+    ]
+  ],
   "Ash.Resource": [
     section_order: [
       :resource,
@@ -94,6 +100,11 @@ config :spark, :formatter,
       :graphql
     ]
   ]
+
+# Used by ash_json_api
+config :mime,
+  extensions: %{"json" => "application/vnd.api+json"},
+  types: %{"application/vnd.api+json" => ["json"]}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

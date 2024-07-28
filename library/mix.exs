@@ -35,6 +35,8 @@ defmodule Library.MixProject do
       # Ash libraries
       {:ash, "~> 3.2"},
       {:picosat_elixir, "~> 0.2.3"},
+      {:ash_json_api, "~> 1.0"},
+      {:open_api_spex, "~> 3.0"},
       {:ash_postgres, "~> 2.0"},
       {:ash_phoenix, "~> 2.0"},
       {:ash_state_machine, "~> 0.2.4"},
