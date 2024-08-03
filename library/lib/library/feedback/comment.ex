@@ -2,7 +2,8 @@ defmodule Library.Feedback.Comment do
   use Ash.Resource,
     otp_app: :library,
     domain: Library.Feedback,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
 
   resource do
     description "Resource handling comments."
@@ -50,6 +51,14 @@ defmodule Library.Feedback.Comment do
     references do
       reference :review, on_delete: :delete
       reference :author, on_delete: :delete
+    end
+  end
+
+  json_api do
+    type "comment"
+
+    primary_key do
+      keys [:id]
     end
   end
 end

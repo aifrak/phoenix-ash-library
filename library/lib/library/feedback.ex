@@ -1,8 +1,12 @@
 defmodule Library.Feedback do
-  use Ash.Domain
+  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain]
+
+  alias Library.Feedback.Author
+  alias Library.Feedback.Comment
+  alias Library.Feedback.Review
 
   resources do
-    resource Library.Feedback.Review do
+    resource Review do
       define :create_review, action: :create
       define :update_review, action: :update
       define :get_review_by_id, get_by: :id, action: :read
@@ -11,7 +15,7 @@ defmodule Library.Feedback do
       define :subscribe_created_reviews, args: [:book_id], action: :subscribe_created
     end
 
-    resource Library.Feedback.Author do
+    resource Author do
       define :create_author, action: :create
       define :update_author, action: :update
       define :get_author_by_id, get_by: :id, action: :read
@@ -19,12 +23,40 @@ defmodule Library.Feedback do
       define :destroy_author, action: :destroy
     end
 
-    resource Library.Feedback.Comment do
+    resource Comment do
       define :create_comment, action: :create
       define :update_comment, action: :update
       define :list_comments_by_review_id, args: [:review_id], action: :list_by_review_id
       define :list_comments_by_author_id, args: [:author_id], action: :list_by_author_id
       define :destroy_comment, action: :destroy
+    end
+  end
+
+  json_api do
+    prefix "/api/json/feedback"
+
+    routes do
+      # in the domain `base_route` acts like a scope
+      base_route "/v1/reviews", Review do
+        get :read
+        index :read
+        post :create
+        delete :destroy
+      end
+
+      base_route "/v1/authors", Author do
+        get :read
+        index :read
+        post :create
+        delete :destroy
+      end
+
+      base_route "/v1/comments", Comment do
+        get :read
+        index :read
+        post :create
+        delete :destroy
+      end
     end
   end
 end

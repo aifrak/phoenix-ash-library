@@ -17,12 +17,21 @@ defmodule LibraryWeb.Router do
   scope "/api/json" do
     pipe_through [:api]
 
-    forward "/swaggerui",
-            OpenApiSpex.Plug.SwaggerUI,
-            path: "/api/json/open_api",
-            default_model_expand_depth: 4
+    scope "/catalog" do
+      forward "/swaggerui", LibraryWeb.Plug.Catalog.SwaggerUI,
+        path: "/api/json/catalog/open_api",
+        default_model_expand_depth: 4
 
-    forward "/", LibraryWeb.AshJsonApiRouter
+      forward "/", LibraryWeb.Plug.Catalog.AshJsonApiRouter
+    end
+
+    scope "/feedback" do
+      forward "/swaggerui", LibraryWeb.Plug.Feedback.SwaggerUI,
+        path: "/api/json/feedback/open_api",
+        default_model_expand_depth: 4
+
+      forward "/", LibraryWeb.Plug.Feedback.AshJsonApiRouter
+    end
   end
 
   scope "/", LibraryWeb do

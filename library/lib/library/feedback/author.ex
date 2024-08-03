@@ -2,7 +2,8 @@ defmodule Library.Feedback.Author do
   use Ash.Resource,
     otp_app: :library,
     domain: Library.Feedback,
-    data_layer: AshPostgres.DataLayer
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
 
   resource do
     description "Resource handling author."
@@ -35,5 +36,9 @@ defmodule Library.Feedback.Author do
   postgres do
     table "feedback_authors"
     repo Library.Repo
+  end
+
+  json_api do
+    type "author"
   end
 end

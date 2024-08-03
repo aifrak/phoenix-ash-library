@@ -4,7 +4,8 @@ defmodule Library.Feedback.Review do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
-    authorizers: [Ash.Policy.Authorizer]
+    authorizers: [Ash.Policy.Authorizer],
+    extensions: [AshJsonApi.Resource]
 
   resource do
     description "Resource handling reviews."
@@ -83,6 +84,14 @@ defmodule Library.Feedback.Review do
 
     # topic: feedback_review:created:#{book_id}
     publish_all :create, ["created", [:book_id, :id]]
+  end
+
+  json_api do
+    type "review"
+
+    primary_key do
+      keys [:book_id, :author_id]
+    end
   end
 
   defp subscribe_created(book_id),
