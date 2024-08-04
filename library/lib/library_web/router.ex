@@ -17,6 +17,8 @@ defmodule LibraryWeb.Router do
   scope "/api/json" do
     pipe_through [:api]
 
+    # Examples of having 2 SwaggerUI served in 2 different routes
+
     scope "/catalog" do
       forward "/swaggerui", LibraryWeb.Plug.Catalog.SwaggerUI,
         path: "/api/json/catalog/open_api",
