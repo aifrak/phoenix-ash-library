@@ -27,11 +27,11 @@ defmodule Library.Catalog.Book do
   end
 
   relationships do
-    many_to_many :authors, Library.Catalog.Author do
-      through Library.Catalog.BookAuthor
-      source_attribute_on_join_resource :book_id
-      destination_attribute_on_join_resource :author_id
-    end
+    many_to_many :authors, Library.Catalog.Author,
+      public?: true,
+      through: Library.Catalog.BookAuthor,
+      source_attribute_on_join_resource: :book_id,
+      destination_attribute_on_join_resource: :author_id
   end
 
   validations do
@@ -48,8 +48,11 @@ defmodule Library.Catalog.Book do
   policies do
     policy action_type(:read), authorize_if: always()
     policy action_type(:create), authorize_if: actor_present()
-    policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
-    policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
+    policy action_type(:update), authorize_if: always()
+    policy action_type(:destroy), authorize_if: always()
+    # Use below if we want to check that the current author is ones of the associated book authors
+    # policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
+    # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
 
   state_machine do
@@ -146,5 +149,6 @@ defmodule Library.Catalog.Book do
 
   json_api do
     type "book"
+    includes authors: []
   end
 end

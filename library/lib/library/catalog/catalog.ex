@@ -39,16 +39,20 @@ defmodule Library.Catalog do
     routes do
       # in the domain `base_route` acts like a scope
       base_route "/v1/books", Book do
-        get :read
+        get :read, primary?: true
         index :search
-        post :create
+        post :create, relationship_arguments: [:authors]
+        patch :update, relationship_arguments: [:authors]
         delete :destroy
+        relationship :authors, :read
+        related :authors, :read
       end
 
       base_route "/v1/authors", Author do
-        get :read
+        get :read, primary?: true
         index :read
         post :create
+        patch :update
         delete :destroy
       end
     end
