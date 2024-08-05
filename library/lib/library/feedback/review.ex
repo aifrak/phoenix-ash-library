@@ -22,9 +22,14 @@ defmodule Library.Feedback.Review do
   end
 
   relationships do
-    belongs_to :book, Library.Catalog.Book, allow_nil?: false, primary_key?: true
-    belongs_to :author, Library.Feedback.Author, allow_nil?: false, primary_key?: true
-    has_many :comments, Library.Feedback.Comment
+    belongs_to :book, Library.Catalog.Book, allow_nil?: false, primary_key?: true, public?: true
+
+    belongs_to :author, Library.Feedback.Author,
+      allow_nil?: false,
+      primary_key?: true,
+      public?: true
+
+    has_many :comments, Library.Feedback.Comment, public?: true
   end
 
   identities do
@@ -42,8 +47,11 @@ defmodule Library.Feedback.Review do
   policies do
     policy action_type(:read), authorize_if: always()
     policy action_type(:create), authorize_if: actor_present()
-    policy action_type(:update), authorize_if: relates_to_actor_via(:author)
-    policy action_type(:destroy), authorize_if: relates_to_actor_via(:author)
+    policy action_type(:update), authorize_if: always()
+    policy action_type(:destroy), authorize_if: always()
+    # Use below if we want to check that the current author is ones of the associated book authors
+    # policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
+    # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
 
   actions do
@@ -92,6 +100,8 @@ defmodule Library.Feedback.Review do
     primary_key do
       keys [:book_id, :author_id]
     end
+
+    includes book: [], author: []
   end
 
   defp subscribe_created(book_id),

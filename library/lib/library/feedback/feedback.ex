@@ -40,14 +40,20 @@ defmodule Library.Feedback do
       base_route "/v1/reviews", Review do
         get :read
         index :read
-        post :create
+        post :create, relationship_arguments: [{:id, :book}, {:id, :author}]
+        patch :update
         delete :destroy
+        relationship :author, :read
+        relationship :comments, :read
+        related :author, :read
+        related :comments, :read
       end
 
       base_route "/v1/authors", Author do
         get :read
         index :read
         post :create
+        patch :update
         delete :destroy
       end
 
@@ -55,6 +61,7 @@ defmodule Library.Feedback do
         get :read
         index :read
         post :create
+        patch :update
         delete :destroy
       end
     end
