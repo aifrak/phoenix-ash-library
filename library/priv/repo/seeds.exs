@@ -57,7 +57,7 @@ feedback_authors = FeedbackFactory.insert!(Feedback.Author, count: 2)
 feedback_author_1 = Enum.at(feedback_authors, 0)
 feedback_author_2 = Enum.at(feedback_authors, 1)
 
-# Published book with 2 reviews and 1 comment
+# # Published book with 2 reviews and 1 comment
 
 feedback_review_1 =
   FeedbackFactory.insert!(Feedback.Review,

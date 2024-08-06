@@ -20,6 +20,7 @@ if Enum.member?([:dev, :test], Mix.env()) do
       attribute :summary, &Book.Fakes.summary/0
       attribute :state, fn -> :published end
       attribute :published_at, &Book.Fakes.published_at/0
+      attribute :price, &Book.Fakes.price/0
     end
 
     factory Author do

@@ -60,5 +60,12 @@ if Enum.member?([:dev, :test], Mix.env()) do
     """
     @spec subject() :: String.t()
     sampler(:subject, ["sci-fi", "drama", "action", "adventure", "politic", "comedy"])
+
+    @spec price() :: Money.t()
+    def price,
+      do: %Money{
+        currency: Faker.Currency.code(),
+        amount: Decimal.new(1, Faker.Random.Elixir.random_between(0, 10_000), -2)
+      }
   end
 end

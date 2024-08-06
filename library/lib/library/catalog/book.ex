@@ -22,6 +22,7 @@ defmodule Library.Catalog.Book do
     attribute :subject, :string, public?: true
     attribute :summary, :string, public?: true
     attribute :published_at, :date, public?: true
+    attribute :price, :money, public?: true
 
     timestamps()
   end
@@ -43,6 +44,7 @@ defmodule Library.Catalog.Book do
     validate string_length(:subject, max: 200)
     validate string_length(:summary, max: 500)
     validate attribute_equals(:state, :draft), on: :destroy
+    validate compare(:price, greater_than_or_equal_to: 0)
   end
 
   policies do
@@ -71,11 +73,11 @@ defmodule Library.Catalog.Book do
     defaults [:read, :destroy]
 
     create :create do
-      accept [:isbn, :title, :subject, :summary, :published_at]
+      accept [:isbn, :title, :subject, :summary, :published_at, :price]
     end
 
     update :update do
-      accept [:title, :subject, :summary, :published_at]
+      accept [:title, :subject, :summary, :published_at, :price]
       argument :authors, {:array, :map}
 
       # Add/remove author is done in another transaction
