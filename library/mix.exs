@@ -41,6 +41,9 @@ defmodule Library.MixProject do
       {:ash_phoenix, "~> 2.0"},
       {:ash_state_machine, "~> 0.2.4"},
       {:smokestack, "~> 0.9", only: [:dev, :test]},
+      # Ash money
+      {:ex_money_sql, "~> 1.0"},
+      {:ash_money, "~> 0.1"},
 
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},

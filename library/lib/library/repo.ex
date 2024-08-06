@@ -3,6 +3,6 @@ defmodule Library.Repo do
 
   # Installs extensions that ash commonly uses
   def installed_extensions do
-    ["ash-functions", "uuid-ossp", "citext"]
+    ["ash-functions", "uuid-ossp", "citext", AshMoney.AshPostgresExtension]
   end
 end

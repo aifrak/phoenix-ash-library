@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :ex_cldr, default_backend: Library.Cldr
+
 config :library,
   ash_domains: [Library.Feedback, Library.Catalog],
   ecto_repos: [Library.Repo],
@@ -62,7 +64,9 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :ash, custom_types: [book_state: Library.Catalog.Book.Types.State]
+config :ash,
+  custom_types: [book_state: Library.Catalog.Book.Types.State],
+  known_types: [AshMoney.Types.Money]
 
 # Log Ash authorization error details
 config :ash, :policies,
