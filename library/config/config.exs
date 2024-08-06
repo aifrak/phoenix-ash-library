@@ -65,7 +65,12 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :ash,
-  custom_types: [book_state: Library.Catalog.Book.Types.State],
+  custom_types: [
+    # Ash types
+    money: AshMoney.Types.Money,
+    # Custom types
+    book_state: Library.Catalog.Book.Types.State
+  ],
   known_types: [AshMoney.Types.Money]
 
 # Log Ash authorization error details
