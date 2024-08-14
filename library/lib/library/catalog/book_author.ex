@@ -23,8 +23,8 @@ defmodule Library.Catalog.BookAuthor do
   end
 
   relationships do
-    belongs_to :book, Book, primary_key?: true, allow_nil?: false
-    belongs_to :author, Author, primary_key?: true, allow_nil?: false
+    belongs_to :book, Book, allow_nil?: false
+    belongs_to :author, Author, allow_nil?: false
   end
 
   identities do
