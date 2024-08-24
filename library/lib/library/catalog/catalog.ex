@@ -1,11 +1,13 @@
 defmodule Library.Catalog do
-  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain]
+  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain, AshPaperTrail.Domain]
 
   alias Library.Catalog.Author
   alias Library.Catalog.Book
   alias Library.Catalog.BookAuthor
+  alias Library.Catalog.VersionView
 
   resources do
+    # Domain
     resource Book do
       define :create_book, action: :create
       define :list_books, action: :read
@@ -31,6 +33,14 @@ defmodule Library.Catalog do
     end
 
     resource BookAuthor
+
+    # Versions (ash_paper_trail)
+    resource Author.Version
+    resource Book.Version
+    resource BookAuthor.Version
+
+    # SQL Views
+    resource VersionView
   end
 
   json_api do
@@ -56,5 +66,9 @@ defmodule Library.Catalog do
         delete :destroy
       end
     end
+  end
+
+  paper_trail do
+    include_versions? false
   end
 end

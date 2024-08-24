@@ -6,7 +6,8 @@ defmodule Library.Catalog.BookAuthor do
   use Ash.Resource,
     otp_app: :library,
     data_layer: AshPostgres.DataLayer,
-    domain: Library.Catalog
+    domain: Library.Catalog,
+    extensions: [AshPaperTrail.Resource]
 
   alias Library.Catalog.Author
   alias Library.Catalog.Book
@@ -43,5 +44,13 @@ defmodule Library.Catalog.BookAuthor do
       reference :book, on_delete: :delete
       reference :author, on_delete: :delete
     end
+  end
+
+  paper_trail do
+    primary_key_type :uuid_v7
+    change_tracking_mode :full_diff
+    store_action_name? true
+    reference_source? false
+    ignore_attributes [:inserted_at, :updated_at]
   end
 end

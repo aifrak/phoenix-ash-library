@@ -3,7 +3,7 @@ defmodule Library.Catalog.Book do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshStateMachine],
+    extensions: [AshJsonApi.Resource, AshStateMachine, AshPaperTrail.Resource],
     authorizers: [Ash.Policy.Authorizer]
 
   alias Library.Catalog.Book.Validations
@@ -49,10 +49,11 @@ defmodule Library.Catalog.Book do
 
   policies do
     policy action_type(:read), authorize_if: always()
-    policy action_type(:create), authorize_if: actor_present()
+    policy action_type(:create), authorize_if: always()
     policy action_type(:update), authorize_if: always()
     policy action_type(:destroy), authorize_if: always()
     # Use below if we want to check that the current author is ones of the associated book authors
+    # policy action_type(:create), authorize_if: actor_present()
     # policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
     # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
@@ -152,5 +153,13 @@ defmodule Library.Catalog.Book do
   json_api do
     type "book"
     includes authors: []
+  end
+
+  paper_trail do
+    primary_key_type :uuid_v7
+    change_tracking_mode :full_diff
+    store_action_name? true
+    reference_source? false
+    ignore_attributes [:inserted_at, :updated_at]
   end
 end

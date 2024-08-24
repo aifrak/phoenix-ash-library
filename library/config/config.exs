@@ -83,7 +83,8 @@ config :spark, :formatter,
   "Ash.Domain": [
     section_order: [
       :resources,
-      :json_api
+      :json_api,
+      :paper_trail
     ]
   ],
   "Ash.Resource": [
@@ -106,7 +107,8 @@ config :spark, :formatter,
       :authentication,
       :token,
       :json_api,
-      :graphql
+      :graphql,
+      :paper_trail
     ]
   ]
 

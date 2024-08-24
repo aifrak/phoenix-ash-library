@@ -3,7 +3,7 @@ defmodule Library.Catalog.Author do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource, AshPaperTrail.Resource]
 
   alias Library.Catalog.Author.Preparations
 
@@ -56,5 +56,13 @@ defmodule Library.Catalog.Author do
 
   json_api do
     type "author"
+  end
+
+  paper_trail do
+    primary_key_type :uuid_v7
+    change_tracking_mode :full_diff
+    store_action_name? true
+    reference_source? false
+    ignore_attributes [:inserted_at, :updated_at]
   end
 end

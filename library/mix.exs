@@ -44,6 +44,7 @@ defmodule Library.MixProject do
       # Ash money
       {:ex_money_sql, "~> 1.0"},
       {:ash_money, "~> 0.1"},
+      {:ash_paper_trail, git: "https://github.com/ash-project/ash_paper_trail"},
 
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},
