@@ -3,7 +3,7 @@ defmodule Library.Catalog.Book do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshStateMachine, AshPaperTrail.Resource],
+    extensions: [AshJsonApi.Resource, AshStateMachine, AshPaperTrail.Resource, AshSlug],
     authorizers: [Ash.Policy.Authorizer]
 
   alias Library.Catalog.Book.Validations
@@ -19,6 +19,7 @@ defmodule Library.Catalog.Book do
     attribute :state, :book_state, default: :draft, allow_nil?: false, public?: true
     attribute :isbn, :string, allow_nil?: false, public?: true
     attribute :title, :string, allow_nil?: false, public?: true
+    attribute :slug, :string
     attribute :subject, :string, public?: true
     attribute :summary, :string, public?: true
     attribute :published_at, :date, public?: true
@@ -75,10 +76,11 @@ defmodule Library.Catalog.Book do
 
     create :create do
       accept [:isbn, :title, :subject, :summary, :published_at, :price]
+      change slugify(:title, into: :slug)
     end
 
     update :update do
-      accept [:title, :subject, :summary, :published_at, :price]
+      accept [:title, :slug, :subject, :summary, :published_at, :price]
       argument :authors, {:array, :map}
 
       # Add/remove author is done in another transaction
