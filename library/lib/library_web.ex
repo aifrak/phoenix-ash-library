@@ -43,7 +43,7 @@ defmodule LibraryWeb do
         layouts: [html: LibraryWeb.Layouts]
 
       import Plug.Conn
-      import LibraryWeb.Gettext
+      use Gettext, backend: LibraryWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -85,7 +85,7 @@ defmodule LibraryWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import LibraryWeb.CoreComponents
-      import LibraryWeb.Gettext
+      use Gettext, backend: LibraryWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

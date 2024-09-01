@@ -17,7 +17,7 @@ defmodule LibraryWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import LibraryWeb.Gettext
+  use Gettext, backend: LibraryWeb.Gettext
 
   @doc """
   Renders a modal.
