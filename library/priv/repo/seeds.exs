@@ -12,6 +12,8 @@
 
 alias Library.Catalog
 alias Library.CatalogFactory
+alias Library.Collaboration
+alias Library.CollaborationFactory
 alias Library.Feedback
 alias Library.FeedbackFactory
 alias Library.Repo
@@ -21,6 +23,8 @@ Repo.delete_all(Feedback.Comment)
 Repo.delete_all(Feedback.Review)
 Repo.delete_all(Catalog.Author)
 Repo.delete_all(Catalog.Book)
+# Remove everything from the csv
+Collaboration.StudyGroup |> AshCsv.DataLayer.Info.file() |> File.write!("")
 
 ### Catalog ###
 
@@ -89,3 +93,7 @@ FeedbackFactory.insert!(Feedback.Comment,
   count: 2,
   relate: [review: feedback_review_1, author: feedback_author_2]
 )
+
+### Collaboration ###
+
+CollaborationFactory.insert!(Collaboration.StudyGroup, count: 3)

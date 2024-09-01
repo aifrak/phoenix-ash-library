@@ -35,3 +35,5 @@ library-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# csv
+/priv/csv

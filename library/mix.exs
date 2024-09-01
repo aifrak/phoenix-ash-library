@@ -42,6 +42,7 @@ defmodule Library.MixProject do
       {:ash_state_machine, "~> 0.2.4"},
       {:smokestack, "~> 0.9", only: [:dev, :test]},
       {:ash_slug, "~> 0.1"},
+      {:ash_csv, "~> 0.9"},
       # Ash money
       {:ex_money_sql, "~> 1.0"},
       {:ash_money, "~> 0.1"},

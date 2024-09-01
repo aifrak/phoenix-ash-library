@@ -10,7 +10,7 @@ import Config
 config :ex_cldr, default_backend: Library.Cldr
 
 config :library,
-  ash_domains: [Library.Feedback, Library.Catalog],
+  ash_domains: [Library.Feedback, Library.Catalog, Library.Collaboration],
   ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime]
 
@@ -103,6 +103,7 @@ config :spark, :formatter,
       :state_machine,
       :actions,
       :postgres,
+      :csv,
       :pub_sub,
       :authentication,
       :token,
