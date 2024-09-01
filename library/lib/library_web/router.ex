@@ -17,7 +17,7 @@ defmodule LibraryWeb.Router do
   scope "/api/json" do
     pipe_through [:api]
 
-    # Examples of having 2 SwaggerUI served in 2 different routes
+    # Examples of having 3 SwaggerUI served in 3 different routes
 
     scope "/catalog" do
       forward "/swaggerui", LibraryWeb.Plug.Catalog.SwaggerUI,
@@ -33,6 +33,14 @@ defmodule LibraryWeb.Router do
         default_model_expand_depth: 4
 
       forward "/", LibraryWeb.Plug.Feedback.AshJsonApiRouter
+    end
+
+    scope "/collaboration" do
+      forward "/swaggerui", LibraryWeb.Plug.Collaboration.SwaggerUI,
+        path: "/api/json/collaboration/open_api",
+        default_model_expand_depth: 4
+
+      forward "/", LibraryWeb.Plug.Collaboration.AshJsonApiRouter
     end
   end
 
