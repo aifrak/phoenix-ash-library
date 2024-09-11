@@ -1,6 +1,10 @@
 defmodule LibraryWeb.Router do
   use LibraryWeb, :router
 
+  pipeline :graphql do
+    plug AshGraphql.Plug
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,6 +16,19 @@ defmodule LibraryWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  scope "/gql" do
+    pipe_through [:graphql]
+
+    forward "/playground",
+            Absinthe.Plug.GraphiQL,
+            schema: Module.concat(["LibraryWeb.GraphqlSchema"]),
+            interface: :playground
+
+    forward "/",
+            Absinthe.Plug,
+            schema: Module.concat(["LibraryWeb.GraphqlSchema"])
   end
 
   scope "/api/json" do

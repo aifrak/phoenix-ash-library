@@ -1,5 +1,7 @@
 defmodule Library.Catalog do
-  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain, AshPaperTrail.Domain]
+  use Ash.Domain,
+    otp_app: :library,
+    extensions: [AshJsonApi.Domain, AshGraphql.Domain, AshPaperTrail.Domain]
 
   alias Library.Catalog.Author
   alias Library.Catalog.Book
@@ -65,6 +67,30 @@ defmodule Library.Catalog do
         patch :update
         delete :destroy
       end
+    end
+  end
+
+  # Good examples with many cases here:
+  # https://github.com/ash-project/ash_graphql/blob/48dcc44ea9240820784ef4d383d476da2f05e5d4/test/support/resources/post.ex#L163
+  graphql do
+    queries do
+      get Book, :book, :read
+      list Book, :books, :read
+      read_one Book, :book_by_title, :by_title
+
+      get Author, :author, :read
+      list Author, :authors, :read
+      list Author, :authors_with_top_5_books, :list_with_top_5_books
+    end
+
+    mutations do
+      create Book, :create_book, :create
+      update Book, :update_book, :update
+      destroy Book, :destroy_book, :destroy
+
+      create Author, :create_author, :create
+      update Author, :update_author, :update
+      destroy Author, :destroy_author, :destroy
     end
   end
 

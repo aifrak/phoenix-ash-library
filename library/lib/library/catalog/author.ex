@@ -3,7 +3,11 @@ defmodule Library.Catalog.Author do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshPaperTrail.Resource]
+    extensions: [
+      AshJsonApi.Resource,
+      AshGraphql.Resource,
+      AshPaperTrail.Resource
+    ]
 
   alias Library.Catalog.Author.Preparations
 
@@ -56,6 +60,10 @@ defmodule Library.Catalog.Author do
 
   json_api do
     type "author"
+  end
+
+  graphql do
+    type :author
   end
 
   paper_trail do

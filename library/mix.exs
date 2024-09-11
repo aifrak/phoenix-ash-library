@@ -32,6 +32,7 @@ defmodule Library.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ash_graphql, "~> 1.0"},
       # Ash libraries
       {:ash, "~> 3.2"},
       {:picosat_elixir, "~> 0.2.3"},
@@ -43,10 +44,11 @@ defmodule Library.MixProject do
       {:smokestack, "~> 0.9", only: [:dev, :test]},
       {:ash_slug, "~> 0.1"},
       {:ash_csv, "~> 0.9"},
+      {:ash_paper_trail, git: "https://github.com/ash-project/ash_paper_trail"},
+
       # Ash money
       {:ex_money_sql, "~> 1.0"},
       {:ash_money, "~> 0.1"},
-      {:ash_paper_trail, git: "https://github.com/ash-project/ash_paper_trail"},
 
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},

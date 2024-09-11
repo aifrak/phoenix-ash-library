@@ -3,7 +3,13 @@ defmodule Library.Catalog.Book do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshStateMachine, AshPaperTrail.Resource, AshSlug],
+    extensions: [
+      AshJsonApi.Resource,
+      AshGraphql.Resource,
+      AshStateMachine,
+      AshPaperTrail.Resource,
+      AshSlug
+    ],
     authorizers: [Ash.Policy.Authorizer]
 
   alias Library.Catalog.Book.Validations
@@ -155,6 +161,14 @@ defmodule Library.Catalog.Book do
   json_api do
     type "book"
     includes authors: []
+  end
+
+  graphql do
+    type :book
+
+    managed_relationships do
+      managed_relationship :update, :authors, lookup_with_primary_key?: true
+    end
   end
 
   paper_trail do

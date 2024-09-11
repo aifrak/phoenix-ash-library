@@ -8,6 +8,14 @@ defmodule Library.Catalog.Book.Types.State do
       retired: "A book retired from the library and not available anymore"
     ]
 
-  @impl true
+  use AshGraphql.Type
+
+  @impl Ash.Type
   def storage_type(), do: :book_state
+
+  @impl AshGraphql.Type
+  def graphql_type(_), do: :book_state
+
+  @impl AshGraphql.Type
+  def graphql_input_type(_), do: :book_state
 end

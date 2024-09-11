@@ -84,6 +84,7 @@ config :spark, :formatter,
     section_order: [
       :resources,
       :json_api,
+      :graphql,
       :paper_trail
     ]
   ],
