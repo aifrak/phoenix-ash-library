@@ -44,7 +44,7 @@ defmodule Library.MixProject do
       {:smokestack, "~> 0.9", only: [:dev, :test]},
       {:ash_slug, "~> 0.1"},
       {:ash_csv, "~> 0.9"},
-      {:ash_paper_trail, git: "https://github.com/ash-project/ash_paper_trail"},
+      {:ash_paper_trail, "~> 0.2"},
 
       # Ash money
       {:ex_money_sql, "~> 1.0"},
