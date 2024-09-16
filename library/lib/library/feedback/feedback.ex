@@ -1,5 +1,5 @@
 defmodule Library.Feedback do
-  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain]
+  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain, AshGraphql.Domain]
 
   alias Library.Feedback.Author
   alias Library.Feedback.Comment
@@ -64,6 +64,33 @@ defmodule Library.Feedback do
         patch :update
         delete :destroy
       end
+    end
+  end
+
+  graphql do
+    queries do
+      get Review, :feedback_review, :read
+      list Review, :feedback_reviews, :read
+
+      get Author, :feedback_author, :read
+      list Author, :feedback_authors, :read
+
+      get Comment, :feedback_comment, :read
+      list Comment, :feedback_comments, :read
+    end
+
+    mutations do
+      create Review, :create_feedback_review, :create
+      update Review, :update_feedback_review, :update
+      destroy Review, :destroy_feedback_review, :destroy
+
+      create Author, :create_feedback_author, :create
+      update Author, :update_feedback_author, :update
+      destroy Author, :destroy_feedback_author, :destroy
+
+      create Comment, :create_feedback_comment, :create
+      update Comment, :update_feedback_comment, :update
+      destroy Comment, :destroy_feedback_comment, :destroy
     end
   end
 end

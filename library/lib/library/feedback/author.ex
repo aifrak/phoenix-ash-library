@@ -3,7 +3,7 @@ defmodule Library.Feedback.Author do
     otp_app: :library,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
   resource do
     description "Resource handling author."
@@ -40,5 +40,9 @@ defmodule Library.Feedback.Author do
 
   json_api do
     type "author"
+  end
+
+  graphql do
+    type :feedback_author
   end
 end

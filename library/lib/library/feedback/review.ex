@@ -5,7 +5,7 @@ defmodule Library.Feedback.Review do
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
   resource do
     description "Resource handling reviews."
@@ -102,6 +102,10 @@ defmodule Library.Feedback.Review do
     end
 
     includes book: [], author: []
+  end
+
+  graphql do
+    type :feedback_review
   end
 
   defp subscribe_created(book_id),

@@ -1,6 +1,6 @@
 defmodule LibraryWeb.GraphqlSchema do
   use Absinthe.Schema
-  use AshGraphql, domains: [Library.Catalog]
+  use AshGraphql, domains: [Library.Catalog, Library.Feedback]
 
   import_types Absinthe.Plug.Types
 

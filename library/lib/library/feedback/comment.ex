@@ -3,7 +3,7 @@ defmodule Library.Feedback.Comment do
     otp_app: :library,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
   resource do
     description "Resource handling comments."
@@ -60,5 +60,9 @@ defmodule Library.Feedback.Comment do
     primary_key do
       keys [:id]
     end
+  end
+
+  graphql do
+    type :feedback_comment
   end
 end
