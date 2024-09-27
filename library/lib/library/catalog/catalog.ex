@@ -74,23 +74,23 @@ defmodule Library.Catalog do
   # https://github.com/ash-project/ash_graphql/blob/48dcc44ea9240820784ef4d383d476da2f05e5d4/test/support/resources/post.ex#L163
   graphql do
     queries do
-      get Book, :book, :read
-      list Book, :books, :read
-      read_one Book, :book_by_title, :by_title
+      get Book, :catalog_book, :read
+      list Book, :catalog_books, :read
+      read_one Book, :catalog_book_by_title, :by_title
 
-      get Author, :author, :read
-      list Author, :authors, :read
-      list Author, :authors_with_top_5_books, :list_with_top_5_books
+      get Author, :catalog_author, :read
+      list Author, :catalog_authors, :read
+      list Author, :catalog_authors_with_top_5_books, :list_with_top_5_books
     end
 
     mutations do
-      create Book, :create_book, :create
-      update Book, :update_book, :update
-      destroy Book, :destroy_book, :destroy
+      create Book, :create_catalog_book, :create
+      update Book, :update_catalog_book, :update
+      destroy Book, :destroy_catalog_book, :destroy
 
-      create Author, :create_author, :create
-      update Author, :update_author, :update
-      destroy Author, :destroy_author, :destroy
+      create Author, :create_catalog_author, :create
+      update Author, :update_catalog_author, :update
+      destroy Author, :destroy_catalog_author, :destroy
     end
   end
 
