@@ -3,7 +3,7 @@ defmodule Library.Collaboration.StudyGroup do
     otp_app: :library,
     domain: Library.Collaboration,
     data_layer: AshCsv.DataLayer,
-    extensions: [AshJsonApi.Resource]
+    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
   resource do
     description "Resource handling study groups."
@@ -66,5 +66,9 @@ defmodule Library.Collaboration.StudyGroup do
 
   json_api do
     type "collaboration_study_group"
+  end
+
+  graphql do
+    type :collaboration_study_group
   end
 end
