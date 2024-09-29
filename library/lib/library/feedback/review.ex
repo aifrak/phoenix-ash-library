@@ -106,6 +106,7 @@ defmodule Library.Feedback.Review do
 
   graphql do
     type :feedback_review
+    hide_fields [:book]
   end
 
   defp subscribe_created(book_id),

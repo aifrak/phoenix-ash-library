@@ -1,9 +1,8 @@
-defmodule LibraryWeb.GraphqlSchema do
+defmodule LibraryWeb.Graphql.Domain.Collaboration.GraphqlSchema do
   use Absinthe.Schema
-  use AshGraphql, domains: [Library.Catalog, Library.Feedback, Library.Collaboration]
+  use AshGraphql, domains: [Library.Collaboration]
 
   import_types Absinthe.Plug.Types
-  import_types LibraryWeb.Graphql.Support.Types.Money
 
   query do
     # Custom Absinthe queries can be placed here

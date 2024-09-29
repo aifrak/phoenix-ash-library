@@ -21,14 +21,37 @@ defmodule LibraryWeb.Router do
   scope "/gql" do
     pipe_through [:graphql]
 
-    forward "/playground",
-            Absinthe.Plug.GraphiQL,
-            schema: Module.concat(["LibraryWeb.GraphqlSchema"]),
-            interface: :playground
+    # Examples of having 3 GraphQL schemas served in 3 different routes
 
-    forward "/",
-            Absinthe.Plug,
-            schema: Module.concat(["LibraryWeb.GraphqlSchema"])
+    scope "/catalog" do
+      forward "/playground",
+              LibraryWeb.Plug.Catalog.GraphiQL,
+              schema: Module.concat(["LibraryWeb.Graphql.Domain.Catalog.GraphqlSchema"]),
+              interface: :playground
+
+      forward "/", LibraryWeb.Plug.Catalog.AshGraphqlRouter,
+        schema: Module.concat(["LibraryWeb.Graphql.Domain.Catalog.GraphqlSchema"])
+    end
+
+    scope "/feedback" do
+      forward "/playground",
+              LibraryWeb.Plug.Feedback.GraphiQL,
+              schema: Module.concat(["LibraryWeb.Graphql.Domain.Feedback.GraphqlSchema"]),
+              interface: :playground
+
+      forward "/", LibraryWeb.Plug.Feedback.AshGraphqlRouter,
+        schema: Module.concat(["LibraryWeb.Graphql.Domain.Feedback.GraphqlSchema"])
+    end
+
+    scope "/collaboration" do
+      forward "/playground",
+              LibraryWeb.Plug.Collaboration.GraphiQL,
+              schema: Module.concat(["LibraryWeb.Graphql.Domain.Collaboration.GraphqlSchema"]),
+              interface: :playground
+
+      forward "/", LibraryWeb.Plug.Collaboration.AshGraphqlRouter,
+        schema: Module.concat(["LibraryWeb.Graphql.Domain.Collaboration.GraphqlSchema"])
+    end
   end
 
   scope "/api/json" do
