@@ -3,16 +3,7 @@ defmodule LibraryWeb.GraphqlSchema do
   use AshGraphql, domains: [Library.Catalog, Library.Feedback, Library.Collaboration]
 
   import_types Absinthe.Plug.Types
-
-  object :money do
-    field :amount, non_null(:decimal)
-    field :currency, non_null(:string)
-  end
-
-  input_object :money_input do
-    field :amount, non_null(:decimal)
-    field :currency, non_null(:string)
-  end
+  import_types LibraryWeb.Graphql.Support.Types.Money
 
   query do
     # Custom Absinthe queries can be placed here
