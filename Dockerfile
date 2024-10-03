@@ -105,7 +105,7 @@ RUN set -e \
   && echo "--- Install packages ---" \
   && apt-get update -qq \
   && apt-get install -y -qq --no-install-recommends \
-    ca-certificates=20230311ubuntu0.22.04.1 \
+    ca-certificates=20240203~22.04.1 \
     inotify-tools=3.22.1.0-* \
     gnupg2=2.2.27-* \
     openssh-client=1:8.9p1-* \
