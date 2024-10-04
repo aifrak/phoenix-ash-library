@@ -3,6 +3,14 @@
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/app",
+  "mounts": [
+    // devcontainer does not have conditional mounting: https://github.com/microsoft/vscode-remote-release/issues/5322
+    // If you VSCode setting "dev.containers.executeInWSL" is false, the path
+    // should be like "/mnt/c/Users/YourUserName/.ssh".
+    // After adding change on Windows, close and reopen VSCode and rebuild
+    // the dev container to apply changes.
+    "source=${localEnv:SSH_PATH:/tmp/fake_ssh},target=/home/app-user/.ssh,readonly,type=bind,consistency=cached,mode=0600,uid=app-user,gid=app-user"
+  ],
   /*
   Workaround to set APP_DIR to current workspace directory.
   devcontainer is ignoring "workspaceFolder" when repository is cloned into a
