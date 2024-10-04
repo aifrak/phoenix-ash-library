@@ -63,7 +63,7 @@ FROM koalaman/shellcheck:v0.10.0 as shellcheck
 FROM mvdan/shfmt:v3.8.0 as shfmt
 FROM hadolint/hadolint:v2.12.0 as hadolint
 
-FROM hexpm/elixir:1.16.3-erlang-26.2.5.1-ubuntu-jammy-20240530 as elixir
+FROM hexpm/elixir:1.17.3-erlang-27.1.1-ubuntu-jammy-20240808 as elixir
 # Install hex and rebar
 RUN set -e \
   && mix local.hex --force \
