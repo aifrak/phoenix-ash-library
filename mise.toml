@@ -1,0 +1,44 @@
+# Tools that can not be installed directly from devbox because of version issue
+[tools]
+elixir = "1.17.3-otp-27"
+
+[tasks."reset:local"]
+description = "Clean and setup everything again."
+run = [
+    "mise run reset:db",
+    "mise run setup",
+    "(cd ./library && mix run priv/repo/seeds.exs)",
+]
+
+[tasks.setup]
+description = "Install dependencies and setup project"
+run = ["mise run install:lang:elixir", "(cd ./library && mix setup)"]
+
+
+[tasks."init:db"]
+description = "Create the database."
+run = [
+    "mkdir -p $PGDATA",
+    "devbox services start postgresql",
+    "initdb -U $POSTGRES_USER -D $PGDATA",
+]
+
+[tasks."install:lang:elixir"]
+description = "Install Elixir, hex and rebar."
+run = [
+    "mise install elixir",
+    "mix local.hex --force",
+    "mix local.rebar --force",
+]
+
+[tasks."destroy:db"]
+description = "Remove the database and its data folder."
+run = "rm -rf $PGDATA/*"
+
+[tasks."reset:db"]
+description = "Remove and initialize the database."
+run = [
+    "devbox services stop postgresql || true",
+    "mise run destroy:db",
+    "mise run init:db",
+]

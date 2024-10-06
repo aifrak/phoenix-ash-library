@@ -1,0 +1,6 @@
+# Data folder used by Postgres (inside devbox)
+.postgres_data
+
+# mise-en-place
+.mise.local.toml
+.mise.*.local.toml

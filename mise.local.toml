@@ -1,0 +1,9 @@
+[env]
+# Postgres built-in env vars
+PGDATA = "./.postgres_data"
+PGUSER = "postgres"
+# Custom database env vars
+POSTGRES_USER = "postgres"
+POSTGRES_DB = "library_dev"
+# Keep iex history
+ERL_AFLAGS = "-kernel shell_history enabled"
