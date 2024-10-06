@@ -10,6 +10,9 @@
     "shfmt@3.8.0"
   ],
   "shell": {
-    "init_hook": ["mise settings set experimental true"]
+    "init_hook": [
+      "mise settings set experimental true",
+      "devbox services restart"
+    ]
   }
 }
