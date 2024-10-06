@@ -7,12 +7,12 @@ description = "Clean and setup everything again."
 run = [
     "mise run reset:db",
     "mise run setup",
-    "(cd ./library && mix run priv/repo/seeds.exs)",
+    "(cd $BASE_DIR/library && mix run priv/repo/seeds.exs)",
 ]
 
 [tasks.setup]
 description = "Install dependencies and setup project"
-run = ["mise run install:lang:elixir", "(cd ./library && mix setup)"]
+run = ["mise run install:lang:elixir", "(cd $BASE_DIR/library && mix setup)"]
 
 
 [tasks."init:db"]

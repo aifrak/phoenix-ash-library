@@ -12,6 +12,7 @@
   "shell": {
     "init_hook": [
       "mise settings set experimental true",
+      "export BASE_DIR=$PWD",
       "devbox services restart"
     ]
   }
