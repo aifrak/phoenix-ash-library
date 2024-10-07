@@ -40,14 +40,25 @@ Enter devbox shell:
 devbox shell
 ```
 
+`(devbox)` at the beginning of the prompt shows that you are inside a devbox
+shell:
+
+```sh
+(devbox) /home/my-user/my-project$
+```
+
 Clean and setup everything:
 
 ```sh
 mise run reset:local
 ```
 
-Trust `mise.toml` and `mise.local.toml`:
+You can use the IDE of your choice inside a devbox shell. For example with
+VSCode:
 
 ```sh
-mise trust
+code .
 ```
+
+If you change environment variables in `devbox.json`, you will need to restart
+your IDE.
