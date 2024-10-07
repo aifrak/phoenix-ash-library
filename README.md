@@ -61,4 +61,4 @@ code .
 ```
 
 If you change environment variables in `devbox.json`, you will need to restart
-your IDE.
+the devbox shell and your IDE.
