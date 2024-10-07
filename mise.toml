@@ -2,6 +2,9 @@
 [tools]
 elixir = "1.17.3-otp-27"
 
+[env]
+BASE_DIR = "{{config_root}}"
+
 [tasks."reset:local"]
 description = "Clean and setup everything again."
 run = [

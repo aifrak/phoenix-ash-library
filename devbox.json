@@ -12,7 +12,8 @@
   "shell": {
     "init_hook": [
       "mise settings set experimental true",
-      "export BASE_DIR=$PWD",
+      "MISE_ENV=${MISE_ENV:-local}",
+      "eval \"$(mise env -s bash)\"",
       "devbox services restart"
     ]
   }
