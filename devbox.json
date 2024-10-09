@@ -10,11 +10,6 @@
     "shfmt@3.8.0"
   ],
   "shell": {
-    "init_hook": [
-      "mise settings set experimental true",
-      "MISE_ENV=${MISE_ENV:-local}",
-      "eval \"$(mise env -s bash)\"",
-      "devbox services restart"
-    ]
+    "init_hook": [". devbox/scripts/init_mise.sh", "devbox services restart"]
   }
 }

@@ -25,6 +25,10 @@ max_line_length = 120
 max_line_length = 100
 quote_type = single
 
+[*.sh]
+binary_next_line = true
+switch_case_indent = true
+
 [Dockerfile*]
 binary_next_line = true
 

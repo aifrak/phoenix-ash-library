@@ -22,18 +22,6 @@ Install devtool:
 devbox install
 ```
 
-Activate mise for `bash` (if you use it):
-
-```sh
-echo 'eval "$(~/.local/bin/mise activate bash)"' >> ~/.bashrc
-```
-
-Activate mise for `zsh` (if you use it):
-
-```sh
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
-```
-
 Enter devbox shell:
 
 ```sh
