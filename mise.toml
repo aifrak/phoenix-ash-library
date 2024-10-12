@@ -8,6 +8,7 @@ BASE_DIR = "{{ config_root }}"
 [tasks."reset:local"]
 description = "Clean and setup everything again."
 run = [
+    "mise run reset:csv",
     "mise run reset:db",
     "mise run setup",
     "(cd $BASE_DIR/library && mix run priv/repo/seeds.exs)",
@@ -45,3 +46,7 @@ run = [
     "mise run destroy:db",
     "mise run init:db",
 ]
+
+[tasks."reset:csv"]
+description = "Remove and initialize the csv data folder."
+run = ["rm -rf $CSV_DATA", "mkdir -p $CSV_DATA"]

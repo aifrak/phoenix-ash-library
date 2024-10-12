@@ -1,6 +1,7 @@
 [env]
+CSV_DATA = "{{ env.BASE_DIR }}/tmp/csv"
 # Postgres built-in env vars
-PGDATA = "{{ env.BASE_DIR }}/.postgres_data"
+PGDATA = "{{ env.BASE_DIR }}/tmp/postgres"
 PGUSER = "postgres"
 # Custom database env vars
 POSTGRES_USER = "postgres"

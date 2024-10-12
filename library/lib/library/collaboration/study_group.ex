@@ -61,7 +61,7 @@ defmodule Library.Collaboration.StudyGroup do
       :updated_at
     ]
 
-    file "priv/csv/collaboration_study_groups.usv"
+    file "#{Library.csv_dir()}/collaboration_study_groups.usv"
   end
 
   json_api do

@@ -12,7 +12,8 @@ config :ex_cldr, default_backend: Library.Cldr
 config :library,
   ash_domains: [Library.Feedback, Library.Catalog, Library.Collaboration],
   ecto_repos: [Library.Repo],
-  generators: [timestamp_type: :utc_datetime]
+  generators: [timestamp_type: :utc_datetime],
+  csv_dir: "#{System.fetch_env!("BASE_DIR")}/tmp/csv/"
 
 # Configures the endpoint
 config :library, LibraryWeb.Endpoint,
