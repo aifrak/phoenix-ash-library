@@ -5,6 +5,8 @@ defmodule Library.Feedback.Author do
     data_layer: AshPostgres.DataLayer,
     extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
+  @type id :: Library.uuid()
+
   resource do
     description "Resource handling author."
     plural_name :authors

@@ -14,6 +14,8 @@ defmodule Library.Catalog.Book do
 
   alias Library.Catalog.Book.Validations
 
+  @type id :: Library.uuid()
+
   resource do
     description "Resource handling books."
     plural_name :books

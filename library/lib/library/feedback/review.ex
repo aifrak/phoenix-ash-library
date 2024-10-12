@@ -7,6 +7,33 @@ defmodule Library.Feedback.Review do
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
+  alias Library.Catalog
+  alias Library.Feedback.Author
+  alias Library.Feedback.Comment
+
+  @type id :: Library.uuid()
+  @type rating :: 1..5
+  @type comment :: String.t()
+  @type book :: Catalog.Book.t()
+  @type book_id :: Catalog.Book.id()
+  @type author :: Author.t()
+  @type author_id :: Author.id()
+  @type comments :: [Comment]
+  @type inserted_at :: DateTime.t()
+  @type updated_at :: DateTime.t()
+  @type t :: %__MODULE__{
+          id: id(),
+          rating: rating(),
+          comment: comment(),
+          book: book(),
+          book_id: book_id(),
+          author: author(),
+          author_id: author_id(),
+          comments: comments(),
+          inserted_at: inserted_at(),
+          updated_at: updated_at()
+        }
+
   resource do
     description "Resource handling reviews."
     plural_name :reviews
@@ -22,14 +49,14 @@ defmodule Library.Feedback.Review do
   end
 
   relationships do
-    belongs_to :book, Library.Catalog.Book, allow_nil?: false, primary_key?: true, public?: true
+    belongs_to :book, Catalog.Book, allow_nil?: false, primary_key?: true, public?: true
 
-    belongs_to :author, Library.Feedback.Author,
+    belongs_to :author, Author,
       allow_nil?: false,
       primary_key?: true,
       public?: true
 
-    has_many :comments, Library.Feedback.Comment, public?: true
+    has_many :comments, Comment, public?: true
   end
 
   identities do
