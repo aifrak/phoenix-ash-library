@@ -11,7 +11,7 @@ defmodule Library.Application do
       LibraryWeb.Telemetry,
       Library.Repo,
       {DNSCluster, query: Application.get_env(:library, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: Library.pub_sub()},
+      {Phoenix.PubSub, name: Library.Config.pub_sub()},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Library.Finch},
       # Start a worker by calling: Library.Worker.start_link(arg)

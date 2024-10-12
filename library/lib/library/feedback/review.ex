@@ -110,5 +110,5 @@ defmodule Library.Feedback.Review do
   end
 
   defp subscribe_created(book_id),
-    do: Phoenix.PubSub.subscribe(Library.pub_sub(), "feedback_review:created:#{book_id}")
+    do: Phoenix.PubSub.subscribe(Library.Config.pub_sub(), "feedback_review:created:#{book_id}")
 end
