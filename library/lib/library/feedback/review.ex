@@ -10,6 +10,7 @@ defmodule Library.Feedback.Review do
   alias Library.Catalog
   alias Library.Feedback.Author
   alias Library.Feedback.Comment
+  alias Library.Feedback.Review.Events
 
   @type id :: Library.uuid()
   @type rating :: 1..5
@@ -97,7 +98,7 @@ defmodule Library.Feedback.Review do
       argument :book_id, :uuid_v7
 
       run fn input, _ ->
-        subscribe_created(input.arguments.book_id)
+        Events.Created.subscribe(input.arguments.book_id)
         :ok
       end
     end
@@ -135,7 +136,4 @@ defmodule Library.Feedback.Review do
     type :feedback_review
     hide_fields [:book]
   end
-
-  defp subscribe_created(book_id),
-    do: Phoenix.PubSub.subscribe(Library.Config.pub_sub(), "feedback_review:created:#{book_id}")
 end
