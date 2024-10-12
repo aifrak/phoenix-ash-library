@@ -1,6 +1,6 @@
 [env]
 # Postgres built-in env vars
-PGDATA = "./.postgres_data"
+PGDATA = "{{ env.BASE_DIR }}/.postgres_data"
 PGUSER = "postgres"
 # Custom database env vars
 POSTGRES_USER = "postgres"
