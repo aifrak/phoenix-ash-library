@@ -75,8 +75,7 @@ defmodule Library.Feedback.Review do
   policies do
     policy action_type(:read), authorize_if: always()
     policy action_type(:create), authorize_if: actor_present()
-    policy action_type(:update), authorize_if: always()
-    policy action_type(:destroy), authorize_if: always()
+    policy action(:subscribe_created), authorize_if: always()
     # Use below if we want to check that the current author is ones of the associated book authors
     # policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
     # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
