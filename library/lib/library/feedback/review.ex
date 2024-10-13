@@ -121,7 +121,7 @@ defmodule Library.Feedback.Review do
     prefix "feedback_review"
 
     # topic: feedback_review:created:#{book_id}
-    publish_all :create, ["created", [:book_id, :id]]
+    publish_all :create, ["created", :book_id]
   end
 
   json_api do

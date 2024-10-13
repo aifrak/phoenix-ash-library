@@ -24,7 +24,7 @@ defmodule LibraryWeb.ReviewNotificationTestLive do
   @impl true
   def handle_info(
         %{
-          topic: "feedback_review:created:" <> _,
+          topic: "feedback_review:created:" <> _book_id,
           event: "create",
           payload: %{data: %Library.Feedback.Review{} = review}
         },
