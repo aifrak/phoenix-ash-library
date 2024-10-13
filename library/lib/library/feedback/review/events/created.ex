@@ -5,9 +5,10 @@ defmodule Library.Feedback.Review.Events.Created do
 
   alias Library.Feedback.Review
   alias Library.PubSubHelper
+  alias LibraryWeb.Endpoint
 
   @spec subscribe(Review.book_id()) :: PubSubHelper.dispatch_result()
-  def subscribe(book_id), do: Phoenix.PubSub.subscribe(Library.Config.pub_sub(), topic(book_id))
+  def subscribe(book_id), do: Endpoint.subscribe(topic(book_id))
 
   @impl true
   def notify(%Ash.Notifier.Notification{
