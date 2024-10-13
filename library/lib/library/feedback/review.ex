@@ -4,7 +4,6 @@ defmodule Library.Feedback.Review do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
-    simple_notifiers: [Library.Feedback.Review.FakeEmailNotifiers],
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
@@ -95,6 +94,8 @@ defmodule Library.Feedback.Review do
 
       change manage_relationship(:book, type: :append)
       change manage_relationship(:author, type: :append)
+
+      notifiers [Library.Feedback.Review.FakeEmailNotifiers]
     end
 
     action :subscribe_created do
