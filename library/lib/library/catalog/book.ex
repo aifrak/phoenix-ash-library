@@ -57,10 +57,10 @@ defmodule Library.Catalog.Book do
   end
 
   policies do
-    policy action_type(:read), authorize_if: always()
-    policy action_type(:create), authorize_if: always()
-    policy action_type(:update), authorize_if: always()
-    policy action_type(:destroy), authorize_if: always()
+    policy_group action_type([:read, :create, :update, :destroy]) do
+      policy authorize_if: always()
+    end
+
     # Use below if we want to check that the current author is ones of the associated book authors
     # policy action_type(:create), authorize_if: actor_present()
     # policy action_type(:update), authorize_if: relates_to_actor_via(:authors)
