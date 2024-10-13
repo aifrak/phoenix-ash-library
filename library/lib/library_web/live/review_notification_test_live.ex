@@ -3,6 +3,8 @@ defmodule LibraryWeb.ReviewNotificationTestLive do
 
   require Logger
 
+  alias Library.Feedback.Review
+
   @impl true
   def handle_params(%{"book_id" => book_id}, _url, socket) do
     if connected?(socket), do: Library.Feedback.subscribe_created_reviews(book_id)
@@ -23,10 +25,12 @@ defmodule LibraryWeb.ReviewNotificationTestLive do
 
   @impl true
   def handle_info(
-        %{
-          topic: "feedback_review:created:" <> _book_id,
-          event: "create",
-          payload: %{data: %Library.Feedback.Review{} = review}
+        %Phoenix.Socket.Broadcast{
+          payload: %Ash.Notifier.Notification{
+            resource: Review,
+            action: %{name: :create},
+            data: %Review{} = review
+          }
         },
         socket
       ) do
