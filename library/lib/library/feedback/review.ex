@@ -4,6 +4,7 @@ defmodule Library.Feedback.Review do
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
+    simple_notifiers: [Library.Feedback.Review.FakeEmailNotifiers],
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshJsonApi.Resource, AshGraphql.Resource]
 
