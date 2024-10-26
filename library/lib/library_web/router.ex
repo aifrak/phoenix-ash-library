@@ -18,6 +18,33 @@ defmodule LibraryWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/", LibraryWeb do
+    pipe_through :browser
+
+    get "/", PageController, :home
+
+    live "/books-tutorial", BooksLive
+
+    # Books
+    live "/books", BookLive.Index, :index
+    live "/books/new", BookLive.Index, :new
+    live "/books/:id/edit", BookLive.Index, :edit
+
+    live "/books/:id", BookLive.Show, :show
+    live "/books/:id/show/edit", BookLive.Show, :edit
+
+    # Authors
+    live "/authors", AuthorLive.Index, :index
+    live "/authors/new", AuthorLive.Index, :new
+    live "/authors/:id/edit", AuthorLive.Index, :edit
+
+    live "/authors/:id", AuthorLive.Show, :show
+    live "/authors/:id/show/edit", AuthorLive.Show, :edit
+
+    # Test pages
+    live "/test/reviews-notifications/:book_id", ReviewNotificationTestLive
+  end
+
   scope "/gql" do
     pipe_through [:graphql]
 
@@ -82,33 +109,6 @@ defmodule LibraryWeb.Router do
 
       forward "/", LibraryWeb.Plug.Collaboration.AshJsonApiRouter
     end
-  end
-
-  scope "/", LibraryWeb do
-    pipe_through :browser
-
-    get "/", PageController, :home
-
-    live "/books-tutorial", BooksLive
-
-    # Books
-    live "/books", BookLive.Index, :index
-    live "/books/new", BookLive.Index, :new
-    live "/books/:id/edit", BookLive.Index, :edit
-
-    live "/books/:id", BookLive.Show, :show
-    live "/books/:id/show/edit", BookLive.Show, :edit
-
-    # Authors
-    live "/authors", AuthorLive.Index, :index
-    live "/authors/new", AuthorLive.Index, :new
-    live "/authors/:id/edit", AuthorLive.Index, :edit
-
-    live "/authors/:id", AuthorLive.Show, :show
-    live "/authors/:id/show/edit", AuthorLive.Show, :edit
-
-    # Test pages
-    live "/test/reviews-notifications/:book_id", ReviewNotificationTestLive
   end
 
   # Other scopes may use custom stacks.
