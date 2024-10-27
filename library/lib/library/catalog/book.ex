@@ -199,6 +199,7 @@ defmodule Library.Catalog.Book do
   end
 
   paper_trail do
+    mixin {Library.Mixins.PaperTrailMixin, :mixin, ["BookVersion", :versions]}
     primary_key_type :uuid_v7
     change_tracking_mode :full_diff
     store_action_name? true
