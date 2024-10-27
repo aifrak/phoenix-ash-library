@@ -4,11 +4,13 @@ defmodule Library.Catalog.Author do
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
     extensions: [
+      AshAdmin.Resource,
       AshJsonApi.Resource,
       AshGraphql.Resource,
       AshPaperTrail.Resource
     ]
 
+  alias Library.Helpers.DateHelper
   alias Library.Catalog.Author.Preparations
 
   resource do
@@ -64,6 +66,13 @@ defmodule Library.Catalog.Author do
 
   graphql do
     type :author
+  end
+
+  admin do
+    resource_group :domain
+
+    format_fields inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
   end
 
   paper_trail do

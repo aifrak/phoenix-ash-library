@@ -3,7 +3,7 @@ defmodule Library.Feedback.Comment do
     otp_app: :library,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
+    extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
 
   resource do
     description "Resource handling comments."
@@ -64,5 +64,15 @@ defmodule Library.Feedback.Comment do
 
   graphql do
     type :feedback_comment
+  end
+
+  admin do
+    form do
+      field :text, type: :long_text
+    end
+
+    format_fields text: {Library.Helpers.StringHelper, :truncate, [50]},
+                  inserted_at: {Library.Helpers.DateHelper, :format_datetime, []},
+                  updated_at: {Library.Helpers.DateHelper, :format_datetime, []}
   end
 end

@@ -4,6 +4,7 @@ defmodule Library.Catalog.Book do
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
     extensions: [
+      AshAdmin.Resource,
       AshJsonApi.Resource,
       AshGraphql.Resource,
       AshStateMachine,
@@ -12,6 +13,8 @@ defmodule Library.Catalog.Book do
     ],
     authorizers: [Ash.Policy.Authorizer]
 
+  alias Library.Helpers.StringHelper
+  alias Library.Helpers.DateHelper
   alias Library.Catalog.Book.Validations
 
   @type id :: Library.uuid()
@@ -171,6 +174,28 @@ defmodule Library.Catalog.Book do
     managed_relationships do
       managed_relationship :update, :authors, lookup_with_primary_key?: true
     end
+  end
+
+  admin do
+    resource_group :domain
+
+    form do
+      field :summary, type: :long_text
+    end
+
+    format_fields summary: {StringHelper, :truncate, [50]},
+                  inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
+
+    table_columns [
+      :id,
+      :state,
+      :isbn,
+      :summary,
+      :published_at,
+      :inserted_at,
+      :updated_at
+    ]
   end
 
   paper_trail do

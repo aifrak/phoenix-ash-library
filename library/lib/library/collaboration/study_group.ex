@@ -3,7 +3,9 @@ defmodule Library.Collaboration.StudyGroup do
     otp_app: :library,
     domain: Library.Collaboration,
     data_layer: AshCsv.DataLayer,
-    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
+    extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
+
+  alias Library.Helpers.DateHelper
 
   resource do
     description "Resource handling study groups."
@@ -70,5 +72,10 @@ defmodule Library.Collaboration.StudyGroup do
 
   graphql do
     type :collaboration_study_group
+  end
+
+  admin do
+    format_fields inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
   end
 end

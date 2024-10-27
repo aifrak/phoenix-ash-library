@@ -1,5 +1,7 @@
 defmodule Library.Feedback do
-  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain, AshGraphql.Domain]
+  use Ash.Domain,
+    otp_app: :library,
+    extensions: [AshJsonApi.Domain, AshGraphql.Domain, AshAdmin.Domain]
 
   alias Library.Feedback.Author
   alias Library.Feedback.Comment
@@ -92,5 +94,9 @@ defmodule Library.Feedback do
       update Comment, :update_feedback_comment, :update
       destroy Comment, :destroy_feedback_comment, :destroy
     end
+  end
+
+  admin do
+    show? true
   end
 end

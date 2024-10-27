@@ -1,5 +1,7 @@
 defmodule Library.Collaboration do
-  use Ash.Domain, otp_app: :library, extensions: [AshJsonApi.Domain, AshGraphql.Domain]
+  use Ash.Domain,
+    otp_app: :library,
+    extensions: [AshJsonApi.Domain, AshGraphql.Domain, AshAdmin.Domain]
 
   alias Library.Collaboration.StudyGroup
 
@@ -39,5 +41,9 @@ defmodule Library.Collaboration do
       update StudyGroup, :update_collaboration_study_group, :update
       destroy StudyGroup, :destroy_collaboration_study_group, :destroy
     end
+  end
+
+  admin do
+    show? true
   end
 end

@@ -45,6 +45,7 @@ defmodule Library.MixProject do
       {:ash_slug, "~> 0.1"},
       {:ash_csv, "~> 0.9"},
       {:ash_paper_trail, "~> 0.2"},
+      {:ash_admin, "~> 0.11.9"},
 
       # Ash money
       {:ex_money_sql, "~> 1.0"},

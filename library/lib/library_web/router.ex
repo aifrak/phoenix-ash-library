@@ -1,6 +1,8 @@
 defmodule LibraryWeb.Router do
   use LibraryWeb, :router
 
+  import AshAdmin.Router
+
   pipeline :graphql do
     plug AshGraphql.Plug
   end
@@ -43,6 +45,16 @@ defmodule LibraryWeb.Router do
 
     # Test pages
     live "/test/reviews-notifications/:book_id", ReviewNotificationTestLive
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    # Reminder:
+    # There is no builtin security for your AshAdmin (except your app's normal policies).
+    # In most cases you will want to secure your AshAdmin routes in some way to prevent
+    # them from being publicly accessible.
+    ash_admin "/admin"
   end
 
   scope "/gql" do

@@ -5,12 +5,14 @@ defmodule Library.Feedback.Review do
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
+    extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
 
   alias Library.Catalog
   alias Library.Feedback.Author
   alias Library.Feedback.Comment
   alias Library.Feedback.Review.Events
+  alias Library.Helpers.StringHelper
+  alias Library.Helpers.DateHelper
 
   @type id :: Library.uuid()
   @type rating :: 1..5
@@ -139,5 +141,15 @@ defmodule Library.Feedback.Review do
   graphql do
     type :feedback_review
     hide_fields [:book]
+  end
+
+  admin do
+    form do
+      field :comment, type: :long_text
+    end
+
+    format_fields comment: {StringHelper, :truncate, [50]},
+                  inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
   end
 end

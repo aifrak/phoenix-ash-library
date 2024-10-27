@@ -7,10 +7,11 @@ defmodule Library.Catalog.BookAuthor do
     otp_app: :library,
     data_layer: AshPostgres.DataLayer,
     domain: Library.Catalog,
-    extensions: [AshPaperTrail.Resource]
+    extensions: [AshAdmin.Resource, AshPaperTrail.Resource]
 
   alias Library.Catalog.Author
   alias Library.Catalog.Book
+  alias Library.Helpers.DateHelper
 
   resource do
     description "The join resource between Book and Author."
@@ -44,6 +45,12 @@ defmodule Library.Catalog.BookAuthor do
       reference :book, on_delete: :delete
       reference :author, on_delete: :delete
     end
+  end
+
+  admin do
+    resource_group :domain
+
+    format_fields inserted_at: {DateHelper, :format_datetime, []}
   end
 
   paper_trail do

@@ -3,7 +3,9 @@ defmodule Library.Feedback.Author do
     otp_app: :library,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
-    extensions: [AshJsonApi.Resource, AshGraphql.Resource]
+    extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
+
+  alias Library.Helpers.DateHelper
 
   @type id :: Library.uuid()
 
@@ -46,5 +48,10 @@ defmodule Library.Feedback.Author do
 
   graphql do
     type :feedback_author
+  end
+
+  admin do
+    format_fields inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
   end
 end

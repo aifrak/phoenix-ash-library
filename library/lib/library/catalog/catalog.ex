@@ -1,7 +1,7 @@
 defmodule Library.Catalog do
   use Ash.Domain,
     otp_app: :library,
-    extensions: [AshJsonApi.Domain, AshGraphql.Domain, AshPaperTrail.Domain]
+    extensions: [AshJsonApi.Domain, AshGraphql.Domain, AshPaperTrail.Domain, AshAdmin.Domain]
 
   alias Library.Catalog.Author
   alias Library.Catalog.Book
@@ -92,6 +92,11 @@ defmodule Library.Catalog do
       update Author, :update_catalog_author, :update
       destroy Author, :destroy_catalog_author, :destroy
     end
+  end
+
+  admin do
+    show? true
+    resource_group_labels domain: "Domain"
   end
 
   paper_trail do

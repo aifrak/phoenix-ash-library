@@ -86,6 +86,7 @@ config :spark, :formatter,
       :resources,
       :json_api,
       :graphql,
+      :admin,
       :paper_trail
     ]
   ],
@@ -111,6 +112,7 @@ config :spark, :formatter,
       :token,
       :json_api,
       :graphql,
+      :admin,
       :paper_trail
     ]
   ]
