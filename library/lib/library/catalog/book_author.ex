@@ -34,7 +34,8 @@ defmodule Library.Catalog.BookAuthor do
   end
 
   actions do
-    defaults [:create, :read, :destroy]
+    defaults [:create, :read, :update, :destroy]
+    default_accept [:book_id, :author_id]
   end
 
   postgres do
