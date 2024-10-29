@@ -77,7 +77,7 @@ defmodule Library.Catalog.Author do
 
   paper_trail do
     primary_key_type :uuid_v7
-    change_tracking_mode :full_diff
+    change_tracking_mode :changes_only
     store_action_name? true
     reference_source? false
     ignore_attributes [:inserted_at, :updated_at]
