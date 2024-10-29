@@ -9,7 +9,7 @@ defmodule Library.Catalog do
   alias Library.Catalog.VersionView
 
   resources do
-    # Domain
+    # Domain (order of resources is used by ash_admin)
     resource Book do
       define :create_book, action: :create
       define :list_books, action: :read
@@ -96,7 +96,8 @@ defmodule Library.Catalog do
 
   admin do
     show? true
-    resource_group_labels domain: "Domain"
+    resource_group_labels domain: "Domain", audit_log: "Audit Log"
+    default_resource_page :primary_read
   end
 
   paper_trail do

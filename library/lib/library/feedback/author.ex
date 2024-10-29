@@ -51,6 +51,8 @@ defmodule Library.Feedback.Author do
   end
 
   admin do
+    resource_group :domain
+
     format_fields inserted_at: {DateHelper, :format_datetime, []},
                   updated_at: {DateHelper, :format_datetime, []}
   end

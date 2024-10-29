@@ -98,5 +98,7 @@ defmodule Library.Feedback do
 
   admin do
     show? true
+    resource_group_labels domain: "Domain"
+    default_resource_page :primary_read
   end
 end

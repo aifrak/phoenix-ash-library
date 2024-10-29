@@ -5,6 +5,9 @@ defmodule Library.Feedback.Comment do
     data_layer: AshPostgres.DataLayer,
     extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
 
+  alias Library.Helpers.StringHelper
+  alias Library.Helpers.DateHelper
+
   resource do
     description "Resource handling comments."
     plural_name :comments
@@ -67,12 +70,14 @@ defmodule Library.Feedback.Comment do
   end
 
   admin do
+    resource_group :domain
+
     form do
       field :text, type: :long_text
     end
 
-    format_fields text: {Library.Helpers.StringHelper, :truncate, [50]},
-                  inserted_at: {Library.Helpers.DateHelper, :format_datetime, []},
-                  updated_at: {Library.Helpers.DateHelper, :format_datetime, []}
+    format_fields text: {StringHelper, :truncate, [50]},
+                  inserted_at: {DateHelper, :format_datetime, []},
+                  updated_at: {DateHelper, :format_datetime, []}
   end
 end

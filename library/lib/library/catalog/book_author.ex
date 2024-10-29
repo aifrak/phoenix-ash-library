@@ -60,5 +60,9 @@ defmodule Library.Catalog.BookAuthor do
     store_action_name? true
     reference_source? false
     ignore_attributes [:inserted_at, :updated_at]
+
+    # Enhance ash_paper_trail's generated resource
+    mixin {Library.Mixins.AshPaperTrailMixin, :mixin, ["BookAuthorVersion", :audit_log]}
+    version_extensions extensions: [AshAdmin.Resource]
   end
 end

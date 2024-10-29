@@ -10,7 +10,8 @@ import Config
 config :ex_cldr, default_backend: Library.Cldr
 
 config :library,
-  ash_domains: [Library.Feedback, Library.Catalog, Library.Collaboration],
+  # Order is used by ash_admin
+  ash_domains: [Library.Catalog, Library.Feedback, Library.Collaboration],
   ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime],
   csv_dir: "#{System.fetch_env!("BASE_DIR")}/tmp/csv/"

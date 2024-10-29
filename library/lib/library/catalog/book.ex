@@ -199,11 +199,14 @@ defmodule Library.Catalog.Book do
   end
 
   paper_trail do
-    mixin {Library.Mixins.PaperTrailMixin, :mixin, ["BookVersion", :versions]}
     primary_key_type :uuid_v7
     change_tracking_mode :changes_only
     store_action_name? true
     reference_source? false
     ignore_attributes [:inserted_at, :updated_at]
+
+    # Enhance ash_paper_trail's generated resource
+    mixin {Library.Mixins.AshPaperTrailMixin, :mixin, ["BookVersion", :audit_log]}
+    version_extensions extensions: [AshAdmin.Resource]
   end
 end

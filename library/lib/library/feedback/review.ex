@@ -144,6 +144,8 @@ defmodule Library.Feedback.Review do
   end
 
   admin do
+    resource_group :domain
+
     form do
       field :comment, type: :long_text
     end

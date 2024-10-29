@@ -3,7 +3,10 @@ defmodule Library.Catalog.VersionView do
     otp_app: :library,
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
-    extensions: AshPaperTrail.Resource
+    extensions: [AshAdmin.Resource, AshPaperTrail.Resource]
+
+  alias Library.Helpers.DateHelper
+  alias Library.Helpers.StringHelper
 
   resource do
     description "Resource handling the SQL view of versions (ash_paper_trail) for a catalog."
@@ -23,11 +26,23 @@ defmodule Library.Catalog.VersionView do
   end
 
   actions do
-    defaults [:read]
+    read :read do
+      prepare build(sort: [{:version_inserted_at, :desc}])
+
+      pagination keyset?: true, default_limit: 10, countable: :by_default
+    end
   end
 
   postgres do
     table "catalog_versions_view"
     repo Library.Repo
+  end
+
+  admin do
+    resource_group :audit_log
+
+    format_fields changes: {StringHelper, :truncate, [100]},
+                  version_inserted_at: {DateHelper, :format_datetime, []},
+                  version_updated_at: {DateHelper, :format_datetime, []}
   end
 end

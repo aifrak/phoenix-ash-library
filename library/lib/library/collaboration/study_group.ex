@@ -75,7 +75,10 @@ defmodule Library.Collaboration.StudyGroup do
   end
 
   admin do
-    format_fields inserted_at: {DateHelper, :format_datetime, []},
+    resource_group :domain
+
+    format_fields meet_at: {DateHelper, :format_datetime, []},
+                  inserted_at: {DateHelper, :format_datetime, []},
                   updated_at: {DateHelper, :format_datetime, []}
   end
 end
