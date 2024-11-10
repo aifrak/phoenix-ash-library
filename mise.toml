@@ -3,6 +3,7 @@
 elixir = "1.17.3-otp-27"
 
 [env]
+MISE_TASK_TIMINGS = 1
 BASE_DIR = "{{ config_root }}"
 
 [tasks."reset:local"]
