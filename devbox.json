@@ -13,6 +13,6 @@
     "shfmt": "3.10.0"
   },
   "shell": {
-    "init_hook": [". devbox/scripts/init_mise.sh", "devbox services restart"]
+    "init_hook": [". scripts/mise/init.sh", "devbox services restart"]
   }
 }
