@@ -25,6 +25,7 @@ run = [
     "mkdir -p $PGDATA",
     "devbox services start postgresql",
     "initdb -U $POSTGRES_USER -D $PGDATA",
+    "createdb -U $POSTGRES_USER $POSTGRES_DB",
 ]
 
 [tasks."install:lang:elixir"]
