@@ -5,36 +5,37 @@ elixir = "1.17.3-otp-27"
 [env]
 MISE_TASK_TIMINGS = 1
 BASE_DIR = "{{ config_root }}"
+PROJECT_DIR = "{{ env.BASE_DIR }}/library"
 
 [tasks."reset:local"]
 description = "Clean and setup everything again."
 run = [
-    "mise run reset:csv",
-    "mise run reset:db",
-    "mise run setup",
-    "(cd $BASE_DIR/library && mix run priv/repo/seeds.exs)",
+  "mise run reset:csv",
+  "mise run reset:db",
+  "mise run setup",
+  "(cd $PROJECT_DIR && mix run priv/repo/seeds.exs)",
 ]
 
 [tasks.setup]
 description = "Install dependencies and setup project"
-run = ["mise run install:lang:elixir", "(cd $BASE_DIR/library && mix setup)"]
+run = ["mise run install:lang:elixir", "(cd $PROJECT_DIR && mix setup)"]
 
 
 [tasks."init:db"]
 description = "Create the database."
 run = [
-    "mkdir -p $PGDATA",
-    "devbox services start postgresql",
-    "initdb -U $POSTGRES_USER -D $PGDATA",
-    "createdb -U $POSTGRES_USER $POSTGRES_DB",
+  "mkdir -p $PGDATA",
+  "devbox services start postgresql",
+  "initdb -U $POSTGRES_USER -D $PGDATA",
+  "createdb -U $POSTGRES_USER $POSTGRES_DB",
 ]
 
 [tasks."install:lang:elixir"]
 description = "Install Elixir, hex and rebar."
 run = [
-    "mise install elixir",
-    "mix local.hex --force",
-    "mix local.rebar --force",
+  "mise install elixir",
+  "mix local.hex --force",
+  "mix local.rebar --force",
 ]
 
 [tasks."destroy:db"]
@@ -44,9 +45,9 @@ run = "rm -rf $PGDATA/*"
 [tasks."reset:db"]
 description = "Remove and initialize the database."
 run = [
-    "devbox services stop postgresql || true",
-    "mise run destroy:db",
-    "mise run init:db",
+  "devbox services stop postgresql || true",
+  "mise run destroy:db",
+  "mise run init:db",
 ]
 
 [tasks."reset:csv"]
