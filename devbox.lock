@@ -453,6 +453,54 @@
           "store_path": "/nix/store/n08cbsh7ns3836dbblby89gxwd1sjwvc-shfmt-3.10.0"
         }
       }
+    },
+    "unzip@6.0": {
+      "last_modified": "2024-11-16T04:25:12Z",
+      "resolved": "github:NixOS/nixpkgs/34a626458d686f1b58139620a8b2793e9e123bba#unzip",
+      "source": "devbox-search",
+      "version": "6.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/amfcwqv0zsh2jcws574yn80pasls47q8-unzip-6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/amfcwqv0zsh2jcws574yn80pasls47q8-unzip-6.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/zf7psadkf0vkf5bdynb1gach8sfb9aki-unzip-6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/zf7psadkf0vkf5bdynb1gach8sfb9aki-unzip-6.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/hwpky1zqgs1hl7zb7ib3m7gb912kkrpg-unzip-6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/hwpky1zqgs1hl7zb7ib3m7gb912kkrpg-unzip-6.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nqhwigwwp19w6xjy86v7jqr0aj6kal44-unzip-6.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nqhwigwwp19w6xjy86v7jqr0aj6kal44-unzip-6.0"
+        }
+      }
     }
   }
 }
