@@ -18,8 +18,11 @@ run = [
 
 [tasks.setup]
 description = "Install dependencies and setup project"
-run = ["mise run install:lang:elixir", "(cd $PROJECT_DIR && mix setup)"]
-
+run = [
+  "mise install",
+  "mise run install:lang:elixir",
+  "(cd $PROJECT_DIR && mix setup)",
+]
 
 [tasks."init:db"]
 description = "Create the database."
