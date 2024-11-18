@@ -21,13 +21,13 @@ Prepare your shell for `mise` (do it only once).
 For Bash:
 
 ```sh
-echo 'eval "$(mise activate bash)" 2> /dev/null' >> ~/.bashrc
+echo 'eval "$($HOME/.local/bin/mise activate bash)"' >> ~/.bashrc
 ```
 
 For Zsh:
 
 ```sh
-echo 'eval "$(mise activate zsh)" 2> /dev/null' >> "${ZDOTDIR-$HOME}/.zshrc"
+echo 'command -v mise &> /dev/null && eval "$(mise activate zsh)"' >> "${ZDOTDIR-$HOME}/.zshrc"
 ```
 
 Install `devbox`:
@@ -49,11 +49,28 @@ shell:
 (devbox) /home/my-user/my-project$
 ```
 
+Trust `mise` configuration files (do it only once):
+
+```sh
+mise trust mise.toml
+mise trust mise.local.toml
+```
+
+Install `mise` tools:
+
+```sh
+mise install
+```
+
 Clean and setup everything:
 
 ```sh
 mise run reset:local
 ```
+
+### Post-install
+
+#### Open VSCode
 
 You can use the IDE of your choice inside a `devbox` shell. For example with
 VSCode:
@@ -62,10 +79,21 @@ VSCode:
 code .
 ```
 
+#### Run a task
+
 To see available tasks or executed one of them, run with this command:
 
 ```sh
 mise run
+```
+
+#### Start Web server
+
+To start the Phoenix Web service, run with this command:
+
+```sh
+cd library
+mix phx.server
 ```
 
 If you change environment variables in `devbox.json`, you will need to restart
