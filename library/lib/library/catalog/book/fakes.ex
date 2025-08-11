@@ -35,7 +35,7 @@ if Enum.member?([:dev, :test], Mix.env()) do
     @spec subjects(Range.t()) :: list(String.t())
     def subjects(range \\ 2..5)
 
-    def subjects(first..last) do
+    def subjects(first..last//_) do
       subjects(Faker.random_between(first, last))
     end
 

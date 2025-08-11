@@ -32,9 +32,9 @@ defmodule Library.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:ash_graphql, "~> 1.0"},
       # Ash libraries
-      {:ash, "~> 3.2"},
+      {:ash_graphql, "~> 1.0"},
+      {:ash, "~> 3.5"},
       {:picosat_elixir, "~> 0.2.3"},
       {:ash_json_api, "~> 1.0"},
       {:open_api_spex, "~> 3.0"},
