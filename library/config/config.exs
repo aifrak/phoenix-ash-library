@@ -11,7 +11,7 @@ config :ex_cldr, default_backend: Library.Cldr
 
 config :library,
   # Order is used by ash_admin
-  ash_domains: [Library.Catalog, Library.Feedback, Library.Collaboration],
+  ash_domains: [Library.Catalog, Library.Feedback, Library.Collaboration, Library.Membership],
   ecto_repos: [Library.Repo],
   generators: [timestamp_type: :utc_datetime],
   csv_dir: "#{System.fetch_env!("BASE_DIR")}/tmp/csv/"
@@ -106,6 +106,9 @@ config :spark, :formatter,
       :changes,
       :state_machine,
       :actions,
+      :account,
+      :transfer,
+      :balance,
       :postgres,
       :csv,
       :pub_sub,

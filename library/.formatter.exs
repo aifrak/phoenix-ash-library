@@ -12,7 +12,8 @@
     :ash_paper_trail,
     :ash_phoenix,
     :ash_postgres,
-    :ash_state_machine
+    :ash_state_machine,
+    :ash_double_entry
   ],
   subdirectories: ["priv/*/migrations"],
   plugins: [Phoenix.LiveView.HTMLFormatter, Spark.Formatter, Absinthe.Formatter],

@@ -16,6 +16,7 @@ alias Library.Collaboration
 alias Library.CollaborationFactory
 alias Library.Feedback
 alias Library.FeedbackFactory
+alias Library.Membership
 alias Library.Repo
 
 Repo.delete_all(Feedback.Author)
@@ -23,6 +24,9 @@ Repo.delete_all(Feedback.Comment)
 Repo.delete_all(Feedback.Review)
 Repo.delete_all(Catalog.Author)
 Repo.delete_all(Catalog.Book)
+Repo.delete_all(Membership.Balance)
+Repo.delete_all(Membership.Transfer)
+Repo.delete_all(Membership.Account)
 # Remove everything from the csv
 Collaboration.StudyGroup |> AshCsv.DataLayer.Info.file() |> File.write!("")
 
@@ -97,3 +101,54 @@ FeedbackFactory.insert!(Feedback.Comment,
 ### Collaboration ###
 
 CollaborationFactory.insert!(Collaboration.StudyGroup, count: 3)
+
+### Membership ###
+
+member =
+  Library.Membership.Account
+  |> Ash.Changeset.for_create(:open, %{
+    number: "123-xyz",
+    identifier: "abc-789",
+    type: :member,
+    currency: :EUR
+  })
+  |> Ash.create!()
+
+vip =
+  Membership.Account
+  |> Ash.Changeset.for_create(:open, %{
+    number: "111-www",
+    identifier: "222-xxx",
+    type: :vip,
+    currency: :EUR
+  })
+  |> Ash.create!()
+
+transfer =
+  Membership.Transfer
+  |> Ash.Changeset.for_create(:transfer, %{
+    amount: Money.new!(50, :EUR),
+    from_account_id: member.id,
+    to_account_id: vip.id
+  })
+  |> Ash.create!()
+
+# Get the current balance of an account for the current date
+# balance_today =
+#   Membership.Account
+#   |> Ash.get!(member, load: :balance_as_of)
+#   |> Map.get(:balance_as_of)
+# => Money.new(:EUR, "-50")
+
+# Get the current balance of an account for a given transfer
+# balance_by_transfer_id =
+#   Membership.Account
+#   |> Ash.get!(member, load: [balance_as_of_ulid: %{ulid: transfer.id}])
+#   |> Map.get(:balance_as_of_ulid)
+# => Money.new(:EUR, "-50")
+
+# balance_by_transfer_id =
+#   Membership.Account
+#   |> Ash.get!(member)
+#   |> Ash.calculate(:balance_as_of_ulid, args: %{ulid: transfer.id})
+# => Money.new(:EUR, "-50")
