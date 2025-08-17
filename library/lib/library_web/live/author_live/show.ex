@@ -5,7 +5,7 @@ defmodule LibraryWeb.AuthorLive.Show do
   def render(assigns) do
     ~H"""
     <.header>
-      Author <%= @author.id %>
+      Author {@author.id}
       <:subtitle>This is a author record from your database.</:subtitle>
 
       <:actions>
@@ -16,11 +16,11 @@ defmodule LibraryWeb.AuthorLive.Show do
     </.header>
 
     <.list>
-      <:item title="Id"><%= @author.id %></:item>
+      <:item title="Id">{@author.id}</:item>
 
-      <:item title="First name"><%= @author.first_name %></:item>
+      <:item title="First name">{@author.first_name}</:item>
 
-      <:item title="Last name"><%= @author.last_name %></:item>
+      <:item title="Last name">{@author.last_name}</:item>
     </.list>
 
     <.back navigate={~p"/authors"}>Back to authors</.back>

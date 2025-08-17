@@ -8,7 +8,6 @@ defmodule Library.Membership.Transfer do
   alias Library.Membership.Account
   alias Library.Membership.Balance
 
-
   transfer do
     account_resource Account
     balance_resource Balance

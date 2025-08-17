@@ -5,7 +5,7 @@ defmodule LibraryWeb.BookLive.Show do
   def render(assigns) do
     ~H"""
     <.header>
-      Book <%= @book.id %>
+      Book {@book.id}
       <:subtitle>This is a book record from your database.</:subtitle>
 
       <:actions>
@@ -16,17 +16,17 @@ defmodule LibraryWeb.BookLive.Show do
     </.header>
 
     <.list>
-      <:item title="Id"><%= @book.id %></:item>
+      <:item title="Id">{@book.id}</:item>
 
-      <:item title="Isbn"><%= @book.isbn %></:item>
+      <:item title="Isbn">{@book.isbn}</:item>
 
-      <:item title="Title"><%= @book.title %></:item>
+      <:item title="Title">{@book.title}</:item>
 
-      <:item title="Subject"><%= @book.subject %></:item>
+      <:item title="Subject">{@book.subject}</:item>
 
-      <:item title="Summary"><%= @book.summary %></:item>
+      <:item title="Summary">{@book.summary}</:item>
 
-      <:item title="Published at"><%= @book.published_at %></:item>
+      <:item title="Published at">{@book.published_at}</:item>
     </.list>
 
     <.back navigate={~p"/books"}>Back to books</.back>

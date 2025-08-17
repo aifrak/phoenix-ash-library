@@ -18,17 +18,17 @@ defmodule LibraryWeb.BookLive.Index do
       rows={@streams.books}
       row_click={fn {_id, book} -> JS.navigate(~p"/books/#{book}") end}
     >
-      <:col :let={{_id, book}} label="Id"><%= book.id %></:col>
+      <:col :let={{_id, book}} label="Id">{book.id}</:col>
 
-      <:col :let={{_id, book}} label="Isbn"><%= book.isbn %></:col>
+      <:col :let={{_id, book}} label="Isbn">{book.isbn}</:col>
 
-      <:col :let={{_id, book}} label="Title"><%= book.title %></:col>
+      <:col :let={{_id, book}} label="Title">{book.title}</:col>
 
-      <:col :let={{_id, book}} label="Subject"><%= book.subject %></:col>
+      <:col :let={{_id, book}} label="Subject">{book.subject}</:col>
 
-      <:col :let={{_id, book}} label="Summary"><%= book.summary %></:col>
+      <:col :let={{_id, book}} label="Summary">{book.summary}</:col>
 
-      <:col :let={{_id, book}} label="Published at"><%= book.published_at %></:col>
+      <:col :let={{_id, book}} label="Published at">{book.published_at}</:col>
 
       <:action :let={{_id, book}}>
         <div class="sr-only">

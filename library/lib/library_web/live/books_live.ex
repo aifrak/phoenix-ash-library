@@ -13,22 +13,22 @@ defmodule LibraryWeb.BooksLive do
       </div>
       <ol class="list-decimal">
         <li :for={book <- @books} class="mt-4">
-          <div class="font-bold"><%= book.title %></div>
+          <div class="font-bold">{book.title}</div>
           <div>
             <div class="font-bold">ISBN:</div>
-            <div><%= book.isbn %></div>
+            <div>{book.isbn}</div>
           </div>
           <div>
             <div class="font-bold">Subject:</div>
-            <div><%= book.subject %></div>
+            <div>{book.subject}</div>
           </div>
           <div>
             <div class="font-bold">Summary:</div>
-            <div><%= book.summary %></div>
+            <div>{book.summary}</div>
           </div>
           <div>
             <div class="font-bold">Published at:</div>
-            <div><%= book.published_at %></div>
+            <div>{book.published_at}</div>
           </div>
           <button
             class="mt-2 p-2 bg-black text-white rounded-md"

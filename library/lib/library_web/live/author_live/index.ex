@@ -18,11 +18,11 @@ defmodule LibraryWeb.AuthorLive.Index do
       rows={@streams.authors}
       row_click={fn {_id, author} -> JS.navigate(~p"/authors/#{author}") end}
     >
-      <:col :let={{_id, author}} label="Id"><%= author.id %></:col>
+      <:col :let={{_id, author}} label="Id">{author.id}</:col>
 
-      <:col :let={{_id, author}} label="First name"><%= author.first_name %></:col>
+      <:col :let={{_id, author}} label="First name">{author.first_name}</:col>
 
-      <:col :let={{_id, author}} label="Last name"><%= author.last_name %></:col>
+      <:col :let={{_id, author}} label="Last name">{author.last_name}</:col>
 
       <:action :let={{_id, author}}>
         <div class="sr-only">

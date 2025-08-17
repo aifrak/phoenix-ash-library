@@ -16,7 +16,7 @@ defmodule LibraryWeb.ReviewNotificationTestLive do
   def render(assigns) do
     ~H"""
     <h2 class="text-xl text-center">Review notification test page</h2>
-    <p>Book ID: <%= @book_id %></p>
+    <p>Book ID: {@book_id}</p>
     <p>
       Add book_id as URL parameter then try to create a review from the console.
     </p>

@@ -6,7 +6,7 @@ defmodule LibraryWeb.BookLive.FormComponent do
     ~H"""
     <div>
       <.header>
-        <%= @title %>
+        {@title}
         <:subtitle>Use this form to manage book records in your database.</:subtitle>
       </.header>
 
