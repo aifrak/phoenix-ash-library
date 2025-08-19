@@ -5,15 +5,16 @@
     :ecto_sql,
     :phoenix,
     :ash,
+    :ash_archival,
     :ash_admin,
     :ash_csv,
+    :ash_double_entry,
     :ash_graphql,
     :ash_json_api,
     :ash_paper_trail,
     :ash_phoenix,
     :ash_postgres,
-    :ash_state_machine,
-    :ash_double_entry
+    :ash_state_machine
   ],
   subdirectories: ["priv/*/migrations"],
   plugins: [Phoenix.LiveView.HTMLFormatter, Spark.Formatter, Absinthe.Formatter],

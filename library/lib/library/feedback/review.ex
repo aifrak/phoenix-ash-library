@@ -1,11 +1,17 @@
 defmodule Library.Feedback.Review do
   use Ash.Resource,
     otp_app: :library,
+    primary_read_warning?: false,
     domain: Library.Feedback,
     data_layer: AshPostgres.DataLayer,
     notifiers: [Ash.Notifier.PubSub],
     authorizers: [Ash.Policy.Authorizer],
-    extensions: [AshAdmin.Resource, AshJsonApi.Resource, AshGraphql.Resource]
+    extensions: [
+      AshAdmin.Resource,
+      AshJsonApi.Resource,
+      AshGraphql.Resource,
+      AshArchival.Resource
+    ]
 
   alias Library.Catalog
   alias Library.Feedback.Author
@@ -87,8 +93,19 @@ defmodule Library.Feedback.Review do
   end
 
   actions do
-    defaults [:read, :update, :destroy]
+    defaults [:update, :destroy]
     default_accept [:rating, :comment]
+
+    read :read_all
+
+    read :read do
+      primary? true
+      filter expr(is_nil(archived_at))
+    end
+
+    read :archived do
+      filter expr(not is_nil(archived_at))
+    end
 
     create :create do
       argument :book, :uuid_v7
@@ -98,6 +115,11 @@ defmodule Library.Feedback.Review do
       change manage_relationship(:author, type: :append)
 
       notifiers [Library.Feedback.Review.FakeEmailNotifiers]
+    end
+
+    update :unarchive do
+      change set_attribute(:archived_at, nil)
+      atomic_upgrade_with :archived
     end
 
     action :subscribe_created do
@@ -118,6 +140,8 @@ defmodule Library.Feedback.Review do
       reference :book, on_delete: :delete
       reference :author, on_delete: :delete
     end
+
+    base_filter_sql "(archived_at IS NULL)"
   end
 
   pub_sub do
@@ -153,5 +177,27 @@ defmodule Library.Feedback.Review do
     format_fields comment: {StringHelper, :truncate, [50]},
                   inserted_at: {DateHelper, :format_datetime, []},
                   updated_at: {DateHelper, :format_datetime, []}
+  end
+
+  # Archive a review with destory
+  # id = "0198b9af-0c08-7ddb-b5b7-1d3a34a1cfef"
+  # review = Ash.get!(Library.Feedback.Review, %{id: id})
+  # Library.Feedback.destroy_review(review)
+
+  # Unarchive
+  # import Ash.Query
+  # review = Ash.Query.for_read(Library.Feedback.Review, :read_all)
+  #   |> Ash.Query.filter(id == ^id)
+  #   |> Ash.read_one!()
+  # archived_review = Library.Feedback.unarchive_review(review)
+  archive do
+    attribute :archived_at
+    attribute_type :utc_datetime_usec
+
+    # archive_related [:author, :comments]
+    exclude_read_actions [:read_all, :archived]
+
+    # Recommended: bypass authorization for related records
+    archive_related_authorize? false
   end
 end
