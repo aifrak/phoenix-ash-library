@@ -30,6 +30,8 @@ defmodule Library.Catalog.BookAuthor do
   end
 
   identities do
+    identity :id, :id
+
     identity :unique, [:book_id, :author_id], message: "Author already associated to the book"
   end
 

@@ -26,6 +26,10 @@ defmodule Library.Feedback.Comment do
     belongs_to :author, Library.Feedback.Author, allow_nil?: false, primary_key?: true
   end
 
+  identities do
+    identity :id, :id
+  end
+
   validations do
     validate string_length(:text, max: 1000)
   end

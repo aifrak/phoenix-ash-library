@@ -35,6 +35,10 @@ defmodule Library.Catalog.Author do
     end
   end
 
+  identities do
+    identity :id, :id
+  end
+
   validations do
     validate string_length(:first_name, max: 100)
     validate string_length(:last_name, max: 100)

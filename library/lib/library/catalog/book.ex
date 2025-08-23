@@ -47,6 +47,10 @@ defmodule Library.Catalog.Book do
       destination_attribute_on_join_resource: :author_id
   end
 
+  identities do
+    identity :id, :id
+  end
+
   validations do
     validate compare(:published_at, less_than_or_equal_to: &Date.utc_today/0),
       message: "must be today or before"

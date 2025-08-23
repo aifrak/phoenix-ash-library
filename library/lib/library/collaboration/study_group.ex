@@ -24,6 +24,8 @@ defmodule Library.Collaboration.StudyGroup do
   end
 
   identities do
+    identity :id, :id
+
     identity :unique, [:subject, :meet_at],
       # ash_csv does not support transactions/unique constraints, or manual resources with
       # identities.

@@ -27,6 +27,10 @@ defmodule Library.Feedback.Author do
     has_many :reviews, Library.Feedback.Review
   end
 
+  identities do
+    identity :id, :id
+  end
+
   validations do
     validate string_length(:first_name, max: 100)
     validate string_length(:last_name, max: 100)
