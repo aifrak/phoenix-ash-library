@@ -47,6 +47,7 @@ defmodule Library.MixProject do
       {:ash_paper_trail, "~> 0.2"},
       {:ash_admin, "~> 0.11.9"},
       {:ash_double_entry, "~> 1.0"},
+      {:ash_archival, "~> 2.0.1"},
       {:sourceror, "~> 1.10", only: [:dev, :test]},
 
       # Ash money

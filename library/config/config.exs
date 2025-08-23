@@ -117,7 +117,8 @@ config :spark, :formatter,
       :json_api,
       :graphql,
       :admin,
-      :paper_trail
+      :paper_trail,
+      :archive
     ]
   ]
 
