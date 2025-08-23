@@ -27,16 +27,16 @@ defmodule Library.Catalog.Author do
     timestamps()
   end
 
+  identities do
+    identity :id, :id
+  end
+
   relationships do
     many_to_many :books, Library.Catalog.Book do
       through Library.Catalog.BookAuthor
       source_attribute_on_join_resource :author_id
       destination_attribute_on_join_resource :book_id
     end
-  end
-
-  identities do
-    identity :id, :id
   end
 
   validations do

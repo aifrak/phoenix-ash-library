@@ -27,13 +27,13 @@ defmodule Library.Feedback.Comment do
     timestamps()
   end
 
+  identities do
+    identity :id, :id
+  end
+
   relationships do
     belongs_to :review, Library.Feedback.Review, allow_nil?: false, primary_key?: true
     belongs_to :author, Library.Feedback.Author, allow_nil?: false, primary_key?: true
-  end
-
-  identities do
-    identity :id, :id
   end
 
   validations do

@@ -57,6 +57,11 @@ defmodule Library.Feedback.Review do
     timestamps()
   end
 
+  identities do
+    identity :id, :id
+    identity :unique, [:book_id, :author_id], message: "Author has already reviewed this book"
+  end
+
   relationships do
     belongs_to :book, Catalog.Book, allow_nil?: false, primary_key?: true, public?: true
 
@@ -66,11 +71,6 @@ defmodule Library.Feedback.Review do
       public?: true
 
     has_many :comments, Comment, public?: true
-  end
-
-  identities do
-    identity :id, :id
-    identity :unique, [:book_id, :author_id], message: "Author has already reviewed this book"
   end
 
   validations do

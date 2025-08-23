@@ -24,15 +24,15 @@ defmodule Library.Catalog.BookAuthor do
     create_timestamp :inserted_at
   end
 
-  relationships do
-    belongs_to :book, Book, allow_nil?: false
-    belongs_to :author, Author, allow_nil?: false
-  end
-
   identities do
     identity :id, :id
 
     identity :unique, [:book_id, :author_id], message: "Author already associated to the book"
+  end
+
+  relationships do
+    belongs_to :book, Book, allow_nil?: false
+    belongs_to :author, Author, allow_nil?: false
   end
 
   actions do

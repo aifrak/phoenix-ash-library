@@ -23,12 +23,12 @@ defmodule Library.Feedback.Author do
     timestamps()
   end
 
-  relationships do
-    has_many :reviews, Library.Feedback.Review
-  end
-
   identities do
     identity :id, :id
+  end
+
+  relationships do
+    has_many :reviews, Library.Feedback.Review
   end
 
   validations do
