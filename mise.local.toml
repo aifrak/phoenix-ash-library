@@ -8,3 +8,5 @@ POSTGRES_USER = "postgres"
 POSTGRES_DB = "library_dev"
 # Keep iex history
 ERL_AFLAGS = "-kernel shell_history enabled"
+# ash_cloak / cloak
+CLOAK_KEY = "kB3nc0fEkw9cZVrfUeo6DCBDfGT86hokmyEkeVHzz0Y="

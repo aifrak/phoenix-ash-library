@@ -104,20 +104,32 @@ config :spark, :formatter,
       :preparations,
       :policies,
       :changes,
+      # ash_cloak
+      :cloak,
+      # ash_state_machine
       :state_machine,
       :actions,
+      # ash_double_entry
       :account,
       :transfer,
       :balance,
+      # ash_postgres
       :postgres,
+      # ash_csv
       :csv,
       :pub_sub,
+      # ash_authentication
       :authentication,
       :token,
+      # ash_json_api
       :json_api,
+      # ash_graphql
       :graphql,
+      # ash_admin
       :admin,
+      # ash_paper_trail
       :paper_trail,
+      # ash_archival
       :archive
     ]
   ]

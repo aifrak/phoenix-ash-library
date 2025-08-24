@@ -7,6 +7,7 @@
     :ash,
     :ash_archival,
     :ash_admin,
+    :ash_cloak,
     :ash_csv,
     :ash_double_entry,
     :ash_graphql,

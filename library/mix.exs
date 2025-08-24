@@ -54,6 +54,10 @@ defmodule Library.MixProject do
       {:ex_money_sql, "~> 1.0"},
       {:ash_money, "~> 0.1"},
 
+      # Ash cloak
+      {:ash_cloak, "~> 0.1.6"},
+      {:cloak, "1.1.1"},
+
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},
       {:phoenix_ecto, "~> 4.5"},

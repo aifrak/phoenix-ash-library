@@ -14,6 +14,7 @@ defmodule Library.Application do
       {Phoenix.PubSub, name: Library.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Library.Finch},
+      Library.Vault,
       # Start a worker by calling: Library.Worker.start_link(arg)
       # {Library.Worker, arg},
       # Start to serve requests, typically the last entry

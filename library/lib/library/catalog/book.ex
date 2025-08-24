@@ -4,6 +4,7 @@ defmodule Library.Catalog.Book do
     domain: Library.Catalog,
     data_layer: AshPostgres.DataLayer,
     extensions: [
+      AshCloak,
       AshAdmin.Resource,
       AshJsonApi.Resource,
       AshGraphql.Resource,
@@ -35,6 +36,7 @@ defmodule Library.Catalog.Book do
     attribute :summary, :string, public?: true
     attribute :published_at, :date, public?: true
     attribute :price, :money, public?: true
+    attribute :secret_notes, :string, public?: true
 
     timestamps()
   end
@@ -74,6 +76,12 @@ defmodule Library.Catalog.Book do
     # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
 
+  cloak do
+    vault Library.Vault
+    attributes [:secret_notes]
+    decrypt_by_default [:secret_notes]
+  end
+
   state_machine do
     initial_states [:draft]
     default_initial_state :draft
@@ -95,7 +103,8 @@ defmodule Library.Catalog.Book do
     end
 
     update :update do
-      accept [:title, :slug, :subject, :summary, :published_at, :price]
+      primary? true
+      accept [:title, :slug, :subject, :summary, :published_at, :price, :secret_notes]
       argument :authors, {:array, :map}
 
       # Add/remove author is done in another transaction
