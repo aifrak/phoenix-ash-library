@@ -133,6 +133,14 @@ defmodule Library.Feedback.Review do
     end
   end
 
+  pub_sub do
+    module LibraryWeb.Endpoint
+    prefix "feedback_review"
+
+    # topic: feedback_review:created:#{book_id}
+    publish_all :create, ["created", :book_id]
+  end
+
   postgres do
     table "feedback_reviews"
     repo Library.Repo
@@ -143,14 +151,6 @@ defmodule Library.Feedback.Review do
     end
 
     base_filter_sql "(archived_at IS NULL)"
-  end
-
-  pub_sub do
-    module LibraryWeb.Endpoint
-    prefix "feedback_review"
-
-    # topic: feedback_review:created:#{book_id}
-    publish_all :create, ["created", :book_id]
   end
 
   json_api do

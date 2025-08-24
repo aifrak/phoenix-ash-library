@@ -76,24 +76,6 @@ defmodule Library.Catalog.Book do
     # policy action_type(:destroy), authorize_if: relates_to_actor_via(:authors)
   end
 
-  cloak do
-    vault Library.Vault
-    attributes [:secret_notes]
-    decrypt_by_default [:secret_notes]
-  end
-
-  state_machine do
-    initial_states [:draft]
-    default_initial_state :draft
-
-    transitions do
-      transition :release_alpha, from: :draft, to: :alpha
-      transition :release_beta, from: [:draft, :alpha], to: :beta
-      transition :publish, from: [:draft, :alpha, :beta], to: :published
-      transition :retire, from: [:draft, :alpha, :beta, :published], to: :retired
-    end
-  end
-
   actions do
     defaults [:read, :destroy]
 
@@ -168,6 +150,24 @@ defmodule Library.Catalog.Book do
                    contains(string_downcase(subject), string_downcase(^arg(:query)))
                end
              )
+    end
+  end
+
+  cloak do
+    vault Library.Vault
+    attributes [:secret_notes]
+    decrypt_by_default [:secret_notes]
+  end
+
+  state_machine do
+    initial_states [:draft]
+    default_initial_state :draft
+
+    transitions do
+      transition :release_alpha, from: :draft, to: :alpha
+      transition :release_beta, from: [:draft, :alpha], to: :beta
+      transition :publish, from: [:draft, :alpha, :beta], to: :published
+      transition :retire, from: [:draft, :alpha, :beta, :published], to: :retired
     end
   end
 
