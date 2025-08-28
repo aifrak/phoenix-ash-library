@@ -1,6 +1,6 @@
 # Tools that can not be installed directly from devbox because of version issue
 [tools]
-elixir = "1.17.3-otp-27"
+elixir = "1.18.4-otp-27"
 
 [env]
 MISE_TASK_TIMINGS = 1
