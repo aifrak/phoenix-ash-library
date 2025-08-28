@@ -11,6 +11,11 @@ defmodule Library.Application do
       LibraryWeb.Telemetry,
       Library.Repo,
       {DNSCluster, query: Application.get_env(:library, :dns_cluster_query) || :ignore},
+      {Oban,
+       AshOban.config(
+         Application.fetch_env!(:library, :ash_domains),
+         Application.fetch_env!(:library, Oban)
+       )},
       {Phoenix.PubSub, name: Library.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Library.Finch},

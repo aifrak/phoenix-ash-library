@@ -35,6 +35,7 @@ defmodule Library.MixProject do
       # Ash libraries
       {:ash_graphql, "~> 1.0"},
       {:ash, "~> 3.5"},
+      {:igniter, "~> 0.6.28", only: [:dev, :test]},
       {:picosat_elixir, "~> 0.2.3"},
       {:ash_json_api, "~> 1.0"},
       {:open_api_spex, "~> 3.0"},
@@ -57,6 +58,10 @@ defmodule Library.MixProject do
       # Ash cloak
       {:ash_cloak, "~> 0.1.6"},
       {:cloak, "1.1.1"},
+
+      # ash_oban
+      {:ash_oban, "~> 0.4"},
+      {:oban, "~> 2.0"},
 
       # Other Phoenix libraries
       {:phoenix, "~> 1.7.14"},

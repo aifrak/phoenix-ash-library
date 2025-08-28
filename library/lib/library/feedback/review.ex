@@ -10,7 +10,8 @@ defmodule Library.Feedback.Review do
       AshAdmin.Resource,
       AshJsonApi.Resource,
       AshGraphql.Resource,
-      AshArchival.Resource
+      AshArchival.Resource,
+      AshOban
     ]
 
   alias Library.Catalog
@@ -19,6 +20,8 @@ defmodule Library.Feedback.Review do
   alias Library.Feedback.Review.Events
   alias Library.Helpers.StringHelper
   alias Library.Helpers.DateHelper
+
+  @hourly "0 * * * *"
 
   @type id :: Library.uuid()
   @type rating :: 1..5
@@ -96,11 +99,16 @@ defmodule Library.Feedback.Review do
     defaults [:update, :destroy]
     default_accept [:rating, :comment]
 
-    read :read_all
+    read :read_all do
+      # Default Ash behaviour for pagination
+      pagination required?: false, offset?: true, keyset?: true
+    end
 
     read :read do
       primary? true
       filter expr(is_nil(archived_at))
+      # Default Ash behaviour for pagination
+      pagination required?: false, offset?: true, keyset?: true
     end
 
     read :archived do
@@ -121,6 +129,10 @@ defmodule Library.Feedback.Review do
       change set_attribute(:archived_at, nil)
       change cascade_update(:comments, action: :unarchive)
       atomic_upgrade_with :archived
+    end
+
+    update :anonymize do
+      change set_attribute(:comment, "[DELETED]")
     end
 
     action :subscribe_created do
@@ -196,5 +208,19 @@ defmodule Library.Feedback.Review do
 
     # Recommended: bypass authorization for related records
     archive_related_authorize? false
+  end
+
+  oban do
+    triggers do
+      trigger :anonymize do
+        action :anonymize
+        queue :review_anonymizer
+        where expr(not is_nil(archived_at))
+        read_action :read_all
+        scheduler_cron @hourly
+        worker_module_name __MODULE__.Process.Worker
+        scheduler_module_name __MODULE__.Process.Scheduler
+      end
+    end
   end
 end

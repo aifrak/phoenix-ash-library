@@ -16,6 +16,13 @@ config :library,
   generators: [timestamp_type: :utc_datetime],
   csv_dir: "#{System.fetch_env!("BASE_DIR")}/tmp/csv/"
 
+config :library, Oban,
+  engine: Oban.Engines.Basic,
+  notifier: Oban.Notifiers.Postgres,
+  queues: [default: 10, review_anonymizer: [limit: 10]],
+  repo: Library.Repo,
+  plugins: [{Oban.Plugins.Cron, []}]
+
 # Configures the endpoint
 config :library, LibraryWeb.Endpoint,
   url: [host: "localhost"],
@@ -142,9 +149,14 @@ config :spark, :formatter,
       :paper_trail,
 
       # ash_archival
-      :archive
+      :archive,
+
+      # ash_oban
+      :oban
     ]
   ]
+
+config :ash_oban, pro?: false
 
 # Used by ash_json_api
 config :mime,

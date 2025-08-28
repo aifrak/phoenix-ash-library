@@ -1,5 +1,6 @@
 [
   import_deps: [
+    :oban,
     :absinthe,
     :ecto,
     :ecto_sql,
@@ -15,6 +16,7 @@
     :ash_paper_trail,
     :ash_phoenix,
     :ash_postgres,
+    :ash_oban,
     :ash_state_machine
   ],
   subdirectories: ["priv/*/migrations"],
