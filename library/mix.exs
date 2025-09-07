@@ -49,6 +49,7 @@ defmodule Library.MixProject do
       {:ash_admin, "~> 0.11.9"},
       {:ash_double_entry, "~> 1.0"},
       {:ash_archival, "~> 2.0.1"},
+      {:ash_rate_limiter, "~> 0.1.2"},
       {:sourceror, "~> 1.10", only: [:dev, :test]},
 
       # Ash money

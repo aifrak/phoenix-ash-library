@@ -11,7 +11,8 @@ defmodule Library.Feedback.Review do
       AshJsonApi.Resource,
       AshGraphql.Resource,
       AshArchival.Resource,
-      AshOban
+      AshOban,
+      AshRateLimiter
     ]
 
   alias Library.Catalog
@@ -112,6 +113,7 @@ defmodule Library.Feedback.Review do
     end
 
     create :create do
+      primary? true
       argument :book, :uuid_v7
       argument :author, :uuid_v7
 
@@ -218,5 +220,29 @@ defmodule Library.Feedback.Review do
         scheduler_module_name __MODULE__.Process.Scheduler
       end
     end
+  end
+
+  # Example to test ash_rate_limiter:
+  #
+  # book_1 = Ash.get!(Library.Catalog.Book, "01992370-0b47-75ed-bbe9-d96c494aec1a")
+  # book_2 = Ash.get!(Library.Catalog.Book, "01992370-0b71-702b-8261-164b6277ee5d")
+  # book_3 = Ash.get!(Library.Catalog.Book, "01992370-0b59-765b-b5c5-b1e57d814536")
+  #
+  # author = Ash.get!(Library.Feedback.Author, "01992370-0b77-7ecb-a939-f675f10cf6f6")
+  #
+  # Library.Feedback.create_review(%{rating: 1, comment: "Not good", book: book_1.id, author: author.id}, actor: author)
+  #
+  # The below fails, because it is 1 creation per minute per user.
+  # Library.Feedback.create_review(%{rating: 3, comment: "OK", book: book_2.id, author: author.id}, actor: author)
+
+  rate_limit do
+    hammer Library.RateLimit
+
+    action :create,
+      limit: 1,
+      per: :timer.minutes(1),
+      key: fn _changeset, context ->
+        "feedback/review/create;user:#{context.actor.id}"
+      end
   end
 end

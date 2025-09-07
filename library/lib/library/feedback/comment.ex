@@ -8,7 +8,8 @@ defmodule Library.Feedback.Comment do
       AshAdmin.Resource,
       AshJsonApi.Resource,
       AshGraphql.Resource,
-      AshArchival.Resource
+      AshArchival.Resource,
+      AshRateLimiter
     ]
 
   alias Library.Helpers.StringHelper
@@ -133,5 +134,26 @@ defmodule Library.Feedback.Comment do
 
     # Recommended: bypass authorization for related records
     archive_related_authorize? false
+  end
+
+  # Example to test ash_rate_limiter:
+  #
+  # review = Ash.get!(Library.Feedback.Review, "019923d2-729f-7810-82a7-9a71770a0efc")
+  # author = Ash.get!(Library.Feedback.Author, "019923d2-7291-7ab9-ab0b-8e306bc51a1b")
+  #
+  # Library.Feedback.create_comment(%{text: "Not good", review: review, author: author.id}, actor: author)
+  #
+  # The below fails, because it is 1 creation per minute per user.
+  # Library.Feedback.create_comment(%{text: "OK", review: review, author: author.id}, actor: author)
+
+  rate_limit do
+    hammer Library.RateLimit
+
+    action :create,
+      limit: 1,
+      per: :timer.minutes(1),
+      key: fn _changeset, context ->
+        "feedback/comment/create;user:#{context.actor.id}"
+      end
   end
 end

@@ -16,6 +16,7 @@ defmodule Library.Application do
          Application.fetch_env!(:library, :ash_domains),
          Application.fetch_env!(:library, Oban)
        )},
+      {Library.RateLimit, clean_period: :timer.minutes(1)},
       {Phoenix.PubSub, name: Library.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Library.Finch},
