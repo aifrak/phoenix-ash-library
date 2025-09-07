@@ -41,7 +41,7 @@ defmodule Library.Feedback.Comment do
   end
 
   actions do
-    defaults [:create, :update, :destroy]
+    defaults [:update, :destroy]
     default_accept [:text]
 
     read :read_all
@@ -49,6 +49,15 @@ defmodule Library.Feedback.Comment do
     read :read do
       primary? true
       filter expr(is_nil(archived_at))
+    end
+
+    create :create do
+      primary? true
+      argument :review, :uuid_v7
+      argument :author, :uuid_v7
+
+      change manage_relationship(:review, type: :append)
+      change manage_relationship(:author, type: :append)
     end
 
     read :archived do
