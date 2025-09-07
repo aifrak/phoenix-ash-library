@@ -66,12 +66,8 @@ defmodule Library.Feedback.Review do
   end
 
   relationships do
-    belongs_to :book, Catalog.Book, allow_nil?: false, primary_key?: true, public?: true
-
-    belongs_to :author, Author,
-      allow_nil?: false,
-      primary_key?: true,
-      public?: true
+    belongs_to :book, Catalog.Book, allow_nil?: false, public?: true
+    belongs_to :author, Author, allow_nil?: false, public?: true
 
     has_many :comments, Comment, public?: true
   end
@@ -169,7 +165,7 @@ defmodule Library.Feedback.Review do
     type "review"
 
     primary_key do
-      keys [:book_id, :author_id]
+      keys [:id]
     end
 
     includes book: [], author: []
