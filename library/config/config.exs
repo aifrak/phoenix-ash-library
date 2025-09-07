@@ -152,7 +152,10 @@ config :spark, :formatter,
       :archive,
 
       # ash_oban
-      :oban
+      :oban,
+
+      # ash_rate_limiter
+      :rate_limit
     ]
   ]
 

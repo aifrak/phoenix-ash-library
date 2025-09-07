@@ -17,6 +17,7 @@
     :ash_phoenix,
     :ash_postgres,
     :ash_oban,
+    :ash_rate_limiter,
     :ash_state_machine
   ],
   subdirectories: ["priv/*/migrations"],
