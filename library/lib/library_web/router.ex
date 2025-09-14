@@ -1,9 +1,14 @@
 defmodule LibraryWeb.Router do
   use LibraryWeb, :router
 
+  use AshAuthentication.Phoenix.Router
+
+  import AshAuthentication.Plug.Helpers
   import AshAdmin.Router
 
   pipeline :graphql do
+    plug :load_from_bearer
+    plug :set_actor, :user
     plug AshGraphql.Plug
   end
 
@@ -14,10 +19,13 @@ defmodule LibraryWeb.Router do
     plug :put_root_layout, html: {LibraryWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :load_from_session
   end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :load_from_bearer
+    plug :set_actor, :user
   end
 
   scope "/", LibraryWeb do
@@ -45,6 +53,58 @@ defmodule LibraryWeb.Router do
 
     # Test pages
     live "/test/reviews-notifications/:book_id", ReviewNotificationTestLive
+  end
+
+  # ash_authentication_phoenix
+  scope "/", LibraryWeb do
+    pipe_through :browser
+
+    auth_routes AuthController, Library.Accounts.User, path: "/auth"
+    sign_out_route AuthController
+
+    # Remove these if you'd like to use your own authentication views
+    sign_in_route register_path: "/register",
+                  reset_path: "/reset",
+                  auth_routes_prefix: "/auth",
+                  on_mount: [{LibraryWeb.LiveUserAuth, :live_no_user}],
+                  overrides: [
+                    LibraryWeb.AuthOverrides,
+                    AshAuthentication.Phoenix.Overrides.Default
+                  ]
+
+    # Remove this if you do not want to use the reset password feature
+    reset_route auth_routes_prefix: "/auth",
+                overrides: [LibraryWeb.AuthOverrides, AshAuthentication.Phoenix.Overrides.Default]
+
+    # Remove this if you do not use the confirmation strategy
+    confirm_route Library.Accounts.User, :confirm_new_user,
+      auth_routes_prefix: "/auth",
+      overrides: [LibraryWeb.AuthOverrides, AshAuthentication.Phoenix.Overrides.Default]
+
+    # Remove this if you do not use the magic link strategy.
+    magic_sign_in_route(Library.Accounts.User, :magic_link,
+      auth_routes_prefix: "/auth",
+      overrides: [LibraryWeb.AuthOverrides, AshAuthentication.Phoenix.Overrides.Default]
+    )
+
+    ash_authentication_live_session :authenticated_routes do
+      # in each liveview, add one of the following at the top of the module:
+      #
+      # If an authenticated user must be present:
+      # on_mount {LibraryWeb.LiveUserAuth, :live_user_required}
+      #
+      # If an authenticated user *may* be present:
+      # on_mount {LibraryWeb.LiveUserAuth, :live_user_optional}
+      #
+      # If an authenticated user must *not* be present:
+      # on_mount {LibraryWeb.LiveUserAuth, :live_no_user}
+    end
+
+    # Custom routes to play with authentication
+    ash_authentication_live_session :authentication_required,
+      on_mount: {LibraryWeb.LiveUserAuth, :live_user_required} do
+      live "/top-secret", TopSecretLive, :index
+    end
   end
 
   scope "/" do

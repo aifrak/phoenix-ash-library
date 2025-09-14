@@ -52,6 +52,10 @@ defmodule Library.MixProject do
       {:ash_rate_limiter, "~> 0.1.2"},
       {:sourceror, "~> 1.10", only: [:dev, :test]},
 
+      # Ash Authentication
+      {:bcrypt_elixir, "~> 3.0"},
+      {:ash_authentication_phoenix, "~> 2.0"},
+
       # Ash money
       {:ex_money_sql, "~> 1.0"},
       {:ash_money, "~> 0.1"},
@@ -115,7 +119,8 @@ defmodule Library.MixProject do
         "tailwind library --minify",
         "esbuild library --minify",
         "phx.digest"
-      ]
+      ],
+      "phx.routes": ["phx.routes", "ash_authentication.phoenix.routes"]
     ]
   end
 end

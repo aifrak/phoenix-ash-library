@@ -24,7 +24,8 @@ defmodule Library.Application do
       # Start a worker by calling: Library.Worker.start_link(arg)
       # {Library.Worker, arg},
       # Start to serve requests, typically the last entry
-      LibraryWeb.Endpoint
+      LibraryWeb.Endpoint,
+      {AshAuthentication.Supervisor, [otp_app: :library]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

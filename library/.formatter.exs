@@ -8,6 +8,8 @@
     :ash,
     :ash_archival,
     :ash_admin,
+    :ash_authentication,
+    :ash_authentication_phoenix,
     :ash_cloak,
     :ash_csv,
     :ash_double_entry,

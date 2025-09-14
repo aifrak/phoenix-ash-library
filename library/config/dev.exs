@@ -63,7 +63,10 @@ config :library, LibraryWeb.Endpoint,
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :library, dev_routes: true
+config :library,
+  dev_routes: true,
+  # ash_authentication
+  token_signing_secret: "LzzmnafCsv/DO90PQWIFD3ci7MOHJTW7"
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

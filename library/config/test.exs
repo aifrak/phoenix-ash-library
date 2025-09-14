@@ -1,5 +1,12 @@
 import Config
 
+config :library,
+  # ash_authentication
+  token_signing_secret: "aajzSs6oMtsIWGhpomDQAO7W6+e2UD3V"
+
+# ash_authentication
+config :bcrypt_elixir, log_rounds: 1
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
