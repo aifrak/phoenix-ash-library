@@ -97,7 +97,8 @@ defmodule Library.MixProject do
       {:bandit, "~> 1.5"},
       {:faker, "~> 0.18", only: [:dev, :test]},
       {:exisbn, "~> 2.0"},
-      {:lazy_html, "~> 0.1.8", only: :test}
+      {:lazy_html, "~> 0.1.8", only: :test},
+      {:tidewave, "~> 0.5", only: [:dev]}
     ]
   end
 

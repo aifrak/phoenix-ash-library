@@ -25,6 +25,11 @@ defmodule LibraryWeb.Endpoint do
     gzip: false,
     only: LibraryWeb.static_paths()
 
+  # Tidewave needs this before the check for Code reloading
+  if Code.ensure_loaded?(Tidewave) do
+    plug Tidewave
+  end
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
