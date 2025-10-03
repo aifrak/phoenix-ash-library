@@ -12,11 +12,13 @@ defmodule Library.Repo.Migrations.AddArchivedAtOnFeedbackReviews do
       add :archived_at, :utc_datetime_usec
     end
 
-    drop_if_exists unique_index(:feedback_reviews, [:id], name: "feedback_reviews_id_index")
+    drop_if_exists unique_index(:feedback_reviews, [:id], name: "feedback_reviews_id_index"),
+      mode: :cascade
 
     drop_if_exists unique_index(:feedback_reviews, [:book_id, :author_id],
                      name: "feedback_reviews_unique_index"
-                   )
+                   ),
+                   mode: :cascade
 
     create unique_index(:feedback_reviews, [:id],
              where: "((archived_at IS NULL))",
