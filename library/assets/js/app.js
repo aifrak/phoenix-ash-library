@@ -21,6 +21,7 @@ import "phoenix_html";
 import { Socket } from "phoenix";
 // Fix "LiveView assert version mismatch."
 // import {LiveSocket} from "phoenix_live_view"
+import { hooks as colocatedHooks } from "phoenix-colocated/library";
 import { LiveSocket } from "../../deps/phoenix_live_view";
 import topbar from "../vendor/topbar";
 
@@ -30,6 +31,7 @@ let csrfToken = document
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
   params: { _csrf_token: csrfToken },
+  hooks: { ...colocatedHooks },
 });
 
 // Show progress bar on live navigation and form submits

@@ -9,7 +9,8 @@ defmodule Library.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      compilers: [:phoenix_live_view] ++ Mix.compilers()
     ]
   end
 
@@ -75,11 +76,9 @@ defmodule Library.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
-      {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
-      {:floki, ">= 0.30.0", only: :test},
+      {:phoenix_live_view, "~> 1.1.13", override: true},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
@@ -97,7 +96,8 @@ defmodule Library.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:faker, "~> 0.18", only: [:dev, :test]},
-      {:exisbn, "~> 2.0"}
+      {:exisbn, "~> 2.0"},
+      {:lazy_html, "~> 0.1.8", only: :test}
     ]
   end
 
