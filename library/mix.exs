@@ -36,7 +36,7 @@ defmodule Library.MixProject do
       # Ash libraries
       {:ash_graphql, "~> 1.0"},
       {:ash, "~> 3.5"},
-      {:igniter, "~> 0.6.28", only: [:dev, :test]},
+      {:igniter, "~> 0.6.30", only: [:dev, :test]},
       {:picosat_elixir, "~> 0.2.3"},
       {:ash_json_api, "~> 1.0"},
       {:open_api_spex, "~> 3.0"},
