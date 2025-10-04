@@ -98,7 +98,8 @@ defmodule Library.MixProject do
       {:faker, "~> 0.18", only: [:dev, :test]},
       {:exisbn, "~> 2.0"},
       {:lazy_html, "~> 0.1.8", only: :test},
-      {:tidewave, "~> 0.5", only: [:dev]}
+      {:tidewave, "~> 0.5", only: [:dev]},
+      {:usage_rules, "~> 0.1", only: [:dev]}
     ]
   end
 
@@ -121,7 +122,10 @@ defmodule Library.MixProject do
         "esbuild library --minify",
         "phx.digest"
       ],
-      "phx.routes": ["phx.routes", "ash_authentication.phoenix.routes"]
+      "phx.routes": ["phx.routes", "ash_authentication.phoenix.routes"],
+      "usage_rules.sync.all": [
+        "usage_rules.sync AGENTS.md --all --inline usage_rules:all --link-to-folder deps --remove-missing"
+      ]
     ]
   end
 end
